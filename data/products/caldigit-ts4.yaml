@@ -1,0 +1,23 @@
+slug: caldigit-ts4
+name: CalDigit TS4
+brand: CalDigit
+category: thunderbolt-4
+msrp_usd: 379
+amazon_asin: B09GK8LBWS
+specs:
+  ports:
+    usb_a: 5
+    usb_c: 3
+    thunderbolt: 2
+    displayport: 1
+    ethernet: 1
+    sd_card: 1
+    audio: 2
+  power_delivery_w: 98
+  max_displays: 2
+  host_interface: thunderbolt-4
+  dimensions_mm: [190, 76, 40]
+  weight_g: 560
+reviews:
+  amazon_asin: B09GK8LBWS
+  wirecutter_pick: true
