@@ -3,7 +3,7 @@ name: Anker 777 Thunderbolt 4 Docking Station
 brand: Anker
 category: thunderbolt-4
 msrp_usd: 329
-amazon_asin: B09F7HHX4W
+# amazon_asin: TBD — ASIN needs verification
 specs:
   ports:
     usb_a: 4
@@ -17,5 +17,4 @@ specs:
   max_displays: 2
   host_interface: thunderbolt-4
   weight_g: 680
-reviews:
-  amazon_asin: B09F7HHX4W
+reviews: {}

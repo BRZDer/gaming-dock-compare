@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# scraper output — only committed by GitHub Actions (US IP = correct USD prices)
+scrape-errors.log
+
+# playwright browser binaries
+/playwright-report/
+/test-results/
+data/prices/*
+!data/prices/.gitkeep
