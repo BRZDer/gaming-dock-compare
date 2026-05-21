@@ -1,12 +1,13 @@
+import { Suspense } from "react"
 import { loadAllProductsWithPrices } from "@/lib/data/loader"
-import { ProductCard } from "@/components/products/ProductCard"
+import { ProductFilters } from "@/components/filters/ProductFilters"
+import { ProductGrid } from "@/components/products/ProductGrid"
 
 export const revalidate = 86400
 
 export default function HomePage() {
-  const products = loadAllProductsWithPrices().sort(
-    (a, b) => (a.current_price?.price_usd ?? a.msrp_usd) - (b.current_price?.price_usd ?? b.msrp_usd)
-  )
+  const products = loadAllProductsWithPrices()
+  const brands = [...new Set(products.map((p) => p.brand))].sort()
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-10">
@@ -17,15 +18,11 @@ export default function HomePage() {
         </p>
       </div>
 
-      <div className="flex items-center justify-between mb-4">
-        <p className="text-sm text-muted-foreground">{products.length} products</p>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {products.map((p) => (
-          <ProductCard key={p.slug} product={p} />
-        ))}
-      </div>
+      <Suspense>
+        <ProductFilters brands={brands} />
+        <p className="text-sm text-muted-foreground mb-4">{products.length} products</p>
+        <ProductGrid products={products} />
+      </Suspense>
     </main>
   )
 }
