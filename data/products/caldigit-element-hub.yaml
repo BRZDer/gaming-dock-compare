@@ -1,0 +1,19 @@
+slug: caldigit-element-hub
+name: CalDigit Element Hub
+brand: CalDigit
+category: thunderbolt-3
+msrp_usd: 219
+amazon_asin: B08GGG449B
+specs:
+  ports:
+    usb_a: 4
+    usb_c: 1
+    thunderbolt: 4
+    ethernet: 0
+    sd_card: 0
+    audio: 0
+  power_delivery_w: 18
+  max_displays: 2
+  host_interface: thunderbolt-3
+reviews:
+  amazon_asin: B08GGG449B

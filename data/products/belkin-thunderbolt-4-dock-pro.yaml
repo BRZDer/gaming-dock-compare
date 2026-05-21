@@ -1,0 +1,21 @@
+slug: belkin-thunderbolt-4-dock-pro
+name: Belkin Thunderbolt 4 Dock Pro
+brand: Belkin
+category: thunderbolt-4
+msrp_usd: 329
+amazon_asin: B08NMR3QWZ
+specs:
+  ports:
+    usb_a: 3
+    usb_c: 1
+    thunderbolt: 3
+    hdmi: 1
+    displayport: 0
+    ethernet: 1
+    sd_card: 1
+    audio: 2
+  power_delivery_w: 96
+  max_displays: 2
+  host_interface: thunderbolt-4
+reviews:
+  amazon_asin: B08NMR3QWZ

@@ -1,0 +1,21 @@
+slug: targus-dock182
+name: Targus USB-C Universal Quad 4K Docking Station
+brand: Targus
+category: usb-c
+msrp_usd: 299
+amazon_asin: B09HVZLMVN
+specs:
+  ports:
+    usb_a: 5
+    usb_c: 2
+    thunderbolt: 0
+    hdmi: 2
+    displayport: 2
+    ethernet: 1
+    sd_card: 1
+    audio: 2
+  power_delivery_w: 100
+  max_displays: 4
+  host_interface: usb-c
+reviews:
+  amazon_asin: B09HVZLMVN

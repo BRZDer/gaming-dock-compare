@@ -1,0 +1,21 @@
+slug: hyperdrive-next-10port
+name: HyperDrive NEXT 10-Port USB-C Dock
+brand: HyperDrive
+category: usb-c
+msrp_usd: 179
+amazon_asin: B0BQZMKQ8G
+specs:
+  ports:
+    usb_a: 3
+    usb_c: 2
+    thunderbolt: 0
+    hdmi: 2
+    displayport: 0
+    ethernet: 1
+    sd_card: 1
+    audio: 1
+  power_delivery_w: 100
+  max_displays: 2
+  host_interface: usb-c
+reviews:
+  amazon_asin: B0BQZMKQ8G

@@ -1,0 +1,21 @@
+slug: corsair-tbt100-thunderbolt3
+name: Corsair TBT100 Thunderbolt 3 Dock
+brand: Corsair
+category: thunderbolt-3
+msrp_usd: 149
+amazon_asin: B07QVHKRXY
+specs:
+  ports:
+    usb_a: 4
+    usb_c: 1
+    thunderbolt: 1
+    hdmi: 0
+    displayport: 2
+    ethernet: 1
+    sd_card: 1
+    audio: 2
+  power_delivery_w: 60
+  max_displays: 2
+  host_interface: thunderbolt-3
+reviews:
+  amazon_asin: B07QVHKRXY

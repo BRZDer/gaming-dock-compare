@@ -1,0 +1,21 @@
+slug: startech-tb4-dock
+name: StarTech.com Thunderbolt 4 Dock (TB4CDOCK)
+brand: StarTech
+category: thunderbolt-4
+msrp_usd: 259
+amazon_asin: B092MRX3GM
+specs:
+  ports:
+    usb_a: 4
+    usb_c: 1
+    thunderbolt: 3
+    hdmi: 0
+    displayport: 1
+    ethernet: 1
+    sd_card: 1
+    audio: 2
+  power_delivery_w: 90
+  max_displays: 2
+  host_interface: thunderbolt-4
+reviews:
+  amazon_asin: B092MRX3GM

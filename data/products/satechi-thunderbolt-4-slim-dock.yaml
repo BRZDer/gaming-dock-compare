@@ -1,0 +1,21 @@
+slug: satechi-thunderbolt-4-slim-dock
+name: Satechi Thunderbolt 4 Slim Hub
+brand: Satechi
+category: thunderbolt-4
+msrp_usd: 199
+amazon_asin: B09BW5LNHH
+specs:
+  ports:
+    usb_a: 3
+    usb_c: 1
+    thunderbolt: 3
+    hdmi: 0
+    displayport: 0
+    ethernet: 0
+    sd_card: 1
+    audio: 0
+  power_delivery_w: 60
+  max_displays: 2
+  host_interface: thunderbolt-4
+reviews:
+  amazon_asin: B09BW5LNHH
