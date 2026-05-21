@@ -4,8 +4,21 @@ import { chromium, type Page } from "playwright"
 import yaml from "js-yaml"
 import { Product, PriceSnapshot } from "../src/types/product"
 
+const PRODUCTS_DIR = path.join(process.cwd(), "data", "products")
+
 const DATA_DIR = path.join(process.cwd(), "data")
 const TODAY = new Date().toISOString().slice(0, 10)
+
+function updateProductRating(slug: string, rating: number, reviewCount: number) {
+  const file = path.join(PRODUCTS_DIR, `${slug}.yaml`)
+  if (!fs.existsSync(file)) return
+  const raw = yaml.load(fs.readFileSync(file, "utf-8")) as Record<string, unknown>
+  const reviews = (raw.reviews ?? {}) as Record<string, unknown>
+  reviews.amazon_rating = rating
+  reviews.amazon_review_count = reviewCount
+  raw.reviews = reviews
+  fs.writeFileSync(file, yaml.dump(raw, { lineWidth: 120 }))
+}
 
 function loadProducts(): Product[] {
   const dir = path.join(DATA_DIR, "products")
@@ -31,7 +44,7 @@ function savePrice(slug: string, snapshot: PriceSnapshot) {
 async function scrapeAmazon(
   page: Page,
   asin: string
-): Promise<{ price: number; inStock: boolean } | null> {
+): Promise<{ price: number; inStock: boolean; rating?: number; reviewCount?: number } | null> {
   try {
     await page.goto(`https://www.amazon.com/dp/${asin}`, {
       waitUntil: "domcontentloaded",
@@ -61,7 +74,24 @@ async function scrapeAmazon(
     if (isNaN(price) || price <= 0) return null
 
     const inStock = (await page.locator("#add-to-cart-button").count()) > 0
-    return { price, inStock }
+
+    // Extract star rating and review count
+    const ratingAttr = await page
+      .locator("#acrPopover")
+      .getAttribute("title")
+      .catch(() => null)
+    const ratingMatch = (ratingAttr ?? "").match(/([0-9.]+)\s+out of/)
+    const rating = ratingMatch ? parseFloat(ratingMatch[1]) : undefined
+
+    const reviewText = await page
+      .locator("#acrCustomerReviewText")
+      .first()
+      .textContent()
+      .catch(() => null)
+    const reviewMatch = (reviewText ?? "").replace(/,/g, "").match(/([0-9]+)/)
+    const reviewCount = reviewMatch ? parseInt(reviewMatch[1]) : undefined
+
+    return { price, inStock, rating, reviewCount }
   } catch {
     return null
   }
@@ -139,6 +169,10 @@ async function main() {
           in_stock: result.inStock,
           affiliate_url: `https://www.amazon.com/dp/${product.amazon_asin}?tag=${process.env.AMAZON_ASSOCIATE_TAG ?? ""}`,
         })
+        if (result.rating !== undefined && result.reviewCount !== undefined) {
+          updateProductRating(product.slug, result.rating, result.reviewCount)
+          console.log(`  [rating] ${result.rating}★ (${result.reviewCount.toLocaleString()} reviews)`)
+        }
         // Polite delay
         await page.waitForTimeout(2000 + Math.random() * 2000)
         continue

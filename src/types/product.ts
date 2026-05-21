@@ -18,8 +18,11 @@ export interface ProductSpecs {
 
 export interface ProductReviews {
   amazon_asin?: string
+  amazon_rating?: number
+  amazon_review_count?: number
   rtings_url?: string
   tomshardware_url?: string
+  pcworld_url?: string
   wirecutter_pick?: boolean
 }
 

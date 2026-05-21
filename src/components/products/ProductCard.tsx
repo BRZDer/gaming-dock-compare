@@ -46,6 +46,35 @@ export function ProductCard({ product }: Props) {
           <span className="font-medium">{specs.max_displays}</span>
         </div>
 
+        {/* Amazon star rating */}
+        {product.reviews?.amazon_rating !== undefined && (
+          <div className="flex items-center gap-1.5 text-sm">
+            <span className="text-amber-400">{"★".repeat(Math.round(product.reviews.amazon_rating))}{"☆".repeat(5 - Math.round(product.reviews.amazon_rating))}</span>
+            <span className="font-medium">{product.reviews.amazon_rating.toFixed(1)}</span>
+            {product.reviews.amazon_review_count !== undefined && (
+              <span className="text-muted-foreground">({product.reviews.amazon_review_count.toLocaleString()})</span>
+            )}
+          </div>
+        )}
+
+        {/* Review links */}
+        {(product.reviews?.tomshardware_url || product.reviews?.pcworld_url) && (
+          <div className="flex gap-2 flex-wrap text-xs">
+            {product.reviews.tomshardware_url && (
+              <a href={product.reviews.tomshardware_url} target="_blank" rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground underline underline-offset-2">
+                Tom&apos;s Hardware
+              </a>
+            )}
+            {product.reviews.pcworld_url && (
+              <a href={product.reviews.pcworld_url} target="_blank" rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground underline underline-offset-2">
+                PCWorld
+              </a>
+            )}
+          </div>
+        )}
+
         {product.reviews?.wirecutter_pick && (
           <Badge className="w-fit bg-green-600 hover:bg-green-700">Wirecutter Pick</Badge>
         )}
