@@ -1,6 +1,7 @@
 import { ProductWithPrices } from "@/types/product"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { getBandwidth, getMaxResolution } from "@/lib/specs"
 
 interface Props {
   product: ProductWithPrices
@@ -37,13 +38,15 @@ export function ProductCard({ product }: Props) {
 
         <div className="grid grid-cols-2 gap-1 text-sm">
           <span className="text-muted-foreground">Interface</span>
-          <span className="font-medium capitalize">{specs.host_interface.replace("-", " ")}</span>
+          <span className="font-medium capitalize">{specs.host_interface.replace(/-/g, " ")}</span>
+          <span className="text-muted-foreground">Transfer Speed</span>
+          <span className="font-medium">{getBandwidth(specs)}</span>
           <span className="text-muted-foreground">Power Delivery</span>
           <span className="font-medium">{specs.power_delivery_w}W</span>
           <span className="text-muted-foreground">Total Ports</span>
           <span className="font-medium">{totalPorts}</span>
           <span className="text-muted-foreground">Max Displays</span>
-          <span className="font-medium">{specs.max_displays}</span>
+          <span className="font-medium">{specs.max_displays} ({getMaxResolution(specs)})</span>
         </div>
 
         {/* Amazon star rating */}

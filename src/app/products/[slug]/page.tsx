@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import { loadAllProducts, loadProductWithPrices } from "@/lib/data/loader"
 import { PriceHistoryChart } from "@/components/charts/PriceHistoryChart"
 import { Badge } from "@/components/ui/badge"
+import { getBandwidth, getMaxResolution } from "@/lib/specs"
 import type { Metadata } from "next"
 
 export const revalidate = 86400
@@ -108,12 +109,18 @@ export default async function ProductPage({
                     </td>
                   </tr>
                   <tr className="border-b bg-muted/30">
+                    <td className="px-4 py-2.5 text-muted-foreground">Transfer Speed</td>
+                    <td className="px-4 py-2.5 font-medium">{getBandwidth(specs)}</td>
+                  </tr>
+                  <tr className="border-b">
                     <td className="px-4 py-2.5 text-muted-foreground">Power Delivery</td>
                     <td className="px-4 py-2.5 font-medium">{specs.power_delivery_w}W</td>
                   </tr>
-                  <tr className="border-b">
+                  <tr className="border-b bg-muted/30">
                     <td className="px-4 py-2.5 text-muted-foreground">Max Displays</td>
-                    <td className="px-4 py-2.5 font-medium">{specs.max_displays}</td>
+                    <td className="px-4 py-2.5 font-medium">
+                      {specs.max_displays} ({getMaxResolution(specs)})
+                    </td>
                   </tr>
                   {portRows.map((row, i) => (
                     <tr key={row.label} className={i % 2 === 0 ? "bg-muted/30 border-b" : "border-b"}>
