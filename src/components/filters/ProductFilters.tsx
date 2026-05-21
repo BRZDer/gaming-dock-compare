@@ -5,6 +5,7 @@ import { useCallback } from "react"
 
 const CATEGORIES = [
   { value: "", label: "All" },
+  { value: "thunderbolt-5", label: "Thunderbolt 5" },
   { value: "thunderbolt-4", label: "Thunderbolt 4" },
   { value: "thunderbolt-3", label: "Thunderbolt 3" },
   { value: "usb-c", label: "USB-C" },

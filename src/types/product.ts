@@ -11,7 +11,7 @@ export interface ProductSpecs {
   }
   power_delivery_w: number
   max_displays: number
-  host_interface: "thunderbolt-4" | "thunderbolt-3" | "usb-c" | "usb-a"
+  host_interface: "thunderbolt-5" | "thunderbolt-4" | "thunderbolt-3" | "usb-c" | "usb-a"
   dimensions_mm?: [number, number, number]
   weight_g?: number
 }
