@@ -5,6 +5,9 @@ on:
     - cron: "0 6 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
@@ -29,12 +32,13 @@ jobs:
           UPSTASH_REDIS_TOKEN: ${{ secrets.UPSTASH_REDIS_TOKEN }}
         run: npx tsx scripts/scrape-prices.ts
 
-      - name: Commit new price data
+      - name: Commit new price and rating data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -f data/prices/
-          git diff --cached --quiet || git commit -m "chore: daily price update $(date -u +%Y-%m-%d)"
+          git add data/products/
+          git diff --cached --quiet || git commit -m "chore: daily price + rating update $(date -u +%Y-%m-%d)"
           git push
 
       - name: Trigger Vercel redeploy
