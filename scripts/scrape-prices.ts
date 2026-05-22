@@ -48,13 +48,20 @@ const cookieJar = new CookieJar()
 
 async function fetchAmazonHtml(asin: string): Promise<string | null> {
   try {
-    const url = `https://www.amazon.com/dp/${asin}`
+    const scraperKey = process.env.SCRAPERAPI_KEY
+    const targetUrl = `https://www.amazon.com/dp/${asin}`
+
+    // Use ScraperAPI if key is available (handles IP rotation + CAPTCHA bypass)
+    const url = scraperKey
+      ? `http://api.scraperapi.com?api_key=${scraperKey}&url=${encodeURIComponent(targetUrl)}&country_code=us`
+      : targetUrl
+
     const cookies = cookieJar.toString()
     const res = await fetch(url, {
       headers: { ...FETCH_HEADERS, ...(cookies ? { Cookie: cookies } : {}) },
       redirect: "follow",
     })
-    cookieJar.update(res.headers)
+    if (!scraperKey) cookieJar.update(res.headers)
     if (!res.ok) return null
     return await res.text()
   } catch {
