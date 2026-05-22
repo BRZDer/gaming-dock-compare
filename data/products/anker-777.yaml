@@ -1,20 +1,23 @@
 slug: anker-777
-name: Anker 777 Thunderbolt 4 Docking Station
+name: Anker Prime TB5 Docking Station
 brand: Anker
-category: thunderbolt-4
-msrp_usd: 329
-# amazon_asin: TBD — ASIN needs verification
+category: thunderbolt-5
+msrp_usd: 340
+amazon_asin: B0DSVVJXK5
 specs:
   ports:
-    usb_a: 4
-    usb_c: 2
-    thunderbolt: 2
+    usb_a: 3
+    usb_c: 3
+    thunderbolt: 3
     hdmi: 1
+    displayport: 1
     ethernet: 1
     sd_card: 1
-    audio: 2
-  power_delivery_w: 90
+    audio: 1
+  power_delivery_w: 140
   max_displays: 2
-  host_interface: thunderbolt-4
-  weight_g: 680
-reviews: {}
+  host_interface: thunderbolt-5
+reviews:
+  amazon_asin: B0DSVVJXK5
+  amazon_rating: 4.3
+  amazon_review_count: 371
