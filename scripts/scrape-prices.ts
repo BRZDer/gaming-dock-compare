@@ -1,8 +1,12 @@
 import fs from "fs"
 import path from "path"
-import { chromium, type Page } from "playwright"
+import { chromium } from "playwright-extra"
+import StealthPlugin from "puppeteer-extra-plugin-stealth"
+import type { Page } from "playwright"
 import yaml from "js-yaml"
 import { Product, PriceSnapshot } from "../src/types/product"
+
+chromium.use(StealthPlugin())
 
 const PRODUCTS_DIR = path.join(process.cwd(), "data", "products")
 
@@ -131,27 +135,22 @@ async function main() {
 
   const browser = await chromium.launch({
     headless: true,
-    args: [
-      "--no-sandbox",
-      "--disable-blink-features=AutomationControlled",
-      "--disable-dev-shm-usage",
-    ],
+    args: ["--no-sandbox", "--disable-dev-shm-usage"],
   })
 
   const context = await browser.newContext({
     userAgent:
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    viewport: { width: 1280, height: 800 },
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    viewport: { width: 1440, height: 900 },
     locale: "en-US",
     extraHTTPHeaders: { "Accept-Language": "en-US,en;q=0.9" },
   })
 
-  // Mask webdriver flag
-  await context.addInitScript(() => {
-    Object.defineProperty(navigator, "webdriver", { get: () => undefined })
-  })
-
   const page = await context.newPage()
+
+  // Warm up: visit Amazon homepage first to get cookies before hitting product pages
+  await page.goto("https://www.amazon.com", { waitUntil: "domcontentloaded", timeout: 20000 })
+  await page.waitForTimeout(2000 + Math.random() * 1000)
 
   console.log(`\nScraping ${products.length} products for ${TODAY}...\n`)
 
@@ -178,6 +177,8 @@ async function main() {
         continue
       }
       console.warn(`  [warn] Amazon failed for ${product.slug}, trying B&H...`)
+      // Delay even on failure — rapid consecutive requests trigger bot detection
+      await page.waitForTimeout(3000 + Math.random() * 2000)
     }
 
     // Fallback: B&H
@@ -199,6 +200,7 @@ async function main() {
     // Both failed
     errors.push(`${product.slug}: no price found (ASIN: ${product.amazon_asin ?? "none"}, B&H: ${product.bh_sku ?? "none"})`)
     console.error(`  [fail] ${product.slug} — could not get price from any source`)
+    await page.waitForTimeout(2000 + Math.random() * 1000)
   }
 
   await browser.close()
