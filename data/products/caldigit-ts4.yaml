@@ -16,8 +16,13 @@ specs:
   power_delivery_w: 98
   max_displays: 2
   host_interface: thunderbolt-4
-  dimensions_mm: [190, 76, 40]
+  dimensions_mm:
+    - 190
+    - 76
+    - 40
   weight_g: 560
 reviews:
   amazon_asin: B09GK8LBWS
   wirecutter_pick: true
+  amazon_rating: 4.1
+  amazon_review_count: 1721
