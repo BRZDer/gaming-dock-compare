@@ -70,26 +70,48 @@ async function fetchAmazonHtml(asin: string): Promise<string | null> {
 }
 
 function parseAmazonHtml(html: string): { price: number; inStock: boolean; rating?: number; reviewCount?: number } | null {
-  // Detect CAPTCHA / robot check
-  if (html.includes('action="/errors/validateCaptcha"') || html.includes("we just need to make sure you're a real person")) {
+  // Detect CAPTCHA / robot check / 404
+  if (
+    html.includes('action="/errors/validateCaptcha"') ||
+    html.includes("we just need to make sure you're a real person") ||
+    html.includes("<title>\n      Page Not Found")
+  ) {
     return null
   }
 
-  // Price: Amazon embeds it in a-offscreen spans for screen readers — most reliable plain-HTML source
-  const priceMatch = html.match(/<span[^>]+class="[^"]*a-offscreen[^"]*"[^>]*>\$([0-9,]+\.[0-9]{2})<\/span>/)
-  if (!priceMatch) return null
-  const price = parseFloat(priceMatch[1].replace(/,/g, ""))
-  if (isNaN(price) || price <= 0) return null
+  // Price: try corePriceDisplay section first (scoped to avoid picking up accessories/sponsored)
+  let price: number | null = null
+  const coreIdx = html.indexOf("corePriceDisplay_desktop_feature_div")
+  const apexIdx = html.indexOf("apex_desktop_newAccordionRow")
+  const searchFrom = coreIdx >= 0 ? coreIdx : apexIdx >= 0 ? apexIdx : 0
+  const searchSection = html.slice(searchFrom, searchFrom > 0 ? searchFrom + 4000 : html.length)
+
+  // Look for a-offscreen price span (screen-reader price — reliable)
+  const offscreenMatch = searchSection.match(/<span[^>]+class="[^"]*a-offscreen[^"]*"[^>]*>\$([0-9,]+\.[0-9]{2})<\/span>/)
+  if (offscreenMatch) {
+    price = parseFloat(offscreenMatch[1].replace(/,/g, ""))
+  }
+
+  // Fallback: a-price-whole + a-price-fraction (rendered price components)
+  if (!price) {
+    const wholeMatch = searchSection.match(/class="a-price-whole">([0-9,]+)/)
+    const fracMatch = searchSection.match(/class="a-price-fraction">([0-9]{2})/)
+    if (wholeMatch) {
+      price = parseFloat(`${wholeMatch[1].replace(/,/g, "")}.${fracMatch?.[1] ?? "00"}`)
+    }
+  }
+
+  if (!price || isNaN(price) || price <= 0) return null
 
   // Stock: add-to-cart button present
   const inStock = html.includes('id="add-to-cart-button"')
 
-  // Rating: <span class="a-icon-alt">4.5 out of 5 stars</span>
+  // Rating: first occurrence (product's own rating, not cross-sell)
   const ratingMatch = html.match(/([0-9.]+) out of 5 stars/)
   const rating = ratingMatch ? parseFloat(ratingMatch[1]) : undefined
 
   // Review count: id="acrCustomerReviewText"
-  const reviewMatch = html.match(/id="acrCustomerReviewText"[^>]*>([\d,]+)/)
+  const reviewMatch = html.match(/id="acrCustomerReviewText"[^>]*>\(?([\d,]+)/)
   const reviewCount = reviewMatch ? parseInt(reviewMatch[1].replace(/,/g, "")) : undefined
 
   return { price, inStock, rating, reviewCount }
