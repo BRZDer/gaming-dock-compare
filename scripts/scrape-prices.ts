@@ -8,6 +8,92 @@ import { Product, PriceSnapshot } from "../src/types/product"
 
 chromium.use(StealthPlugin())
 
+// ── HTTP fetch-based Amazon scraper (no browser, no fingerprint) ──────────────
+
+const FETCH_HEADERS = {
+  "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+  "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+  "Accept-Language": "en-US,en;q=0.9",
+  "Accept-Encoding": "gzip, deflate, br",
+  "Sec-Ch-Ua": '"Chromium";v="136", "Google Chrome";v="136", "Not-A.Brand";v="8"',
+  "Sec-Ch-Ua-Mobile": "?0",
+  "Sec-Ch-Ua-Platform": '"macOS"',
+  "Sec-Fetch-Dest": "document",
+  "Sec-Fetch-Mode": "navigate",
+  "Sec-Fetch-Site": "none",
+  "Sec-Fetch-User": "?1",
+  "Upgrade-Insecure-Requests": "1",
+  "Cache-Control": "max-age=0",
+}
+
+class CookieJar {
+  private jar: Map<string, string> = new Map()
+
+  update(headers: Headers) {
+    // Node 18 fetch doesn't expose Set-Cookie as array easily; parse raw header
+    const raw = headers.get("set-cookie") ?? ""
+    for (const chunk of raw.split(/,(?=[^ ])/)) {
+      const pair = chunk.split(";")[0].trim()
+      const eq = pair.indexOf("=")
+      if (eq > 0) this.jar.set(pair.slice(0, eq).trim(), pair.slice(eq + 1).trim())
+    }
+  }
+
+  toString() {
+    return Array.from(this.jar.entries()).map(([k, v]) => `${k}=${v}`).join("; ")
+  }
+}
+
+const cookieJar = new CookieJar()
+
+async function fetchAmazonHtml(asin: string): Promise<string | null> {
+  try {
+    const url = `https://www.amazon.com/dp/${asin}`
+    const cookies = cookieJar.toString()
+    const res = await fetch(url, {
+      headers: { ...FETCH_HEADERS, ...(cookies ? { Cookie: cookies } : {}) },
+      redirect: "follow",
+    })
+    cookieJar.update(res.headers)
+    if (!res.ok) return null
+    return await res.text()
+  } catch {
+    return null
+  }
+}
+
+function parseAmazonHtml(html: string): { price: number; inStock: boolean; rating?: number; reviewCount?: number } | null {
+  // Detect CAPTCHA / robot check
+  if (html.includes('action="/errors/validateCaptcha"') || html.includes("we just need to make sure you're a real person")) {
+    return null
+  }
+
+  // Price: Amazon embeds it in a-offscreen spans for screen readers — most reliable plain-HTML source
+  const priceMatch = html.match(/<span[^>]+class="[^"]*a-offscreen[^"]*"[^>]*>\$([0-9,]+\.[0-9]{2})<\/span>/)
+  if (!priceMatch) return null
+  const price = parseFloat(priceMatch[1].replace(/,/g, ""))
+  if (isNaN(price) || price <= 0) return null
+
+  // Stock: add-to-cart button present
+  const inStock = html.includes('id="add-to-cart-button"')
+
+  // Rating: <span class="a-icon-alt">4.5 out of 5 stars</span>
+  const ratingMatch = html.match(/([0-9.]+) out of 5 stars/)
+  const rating = ratingMatch ? parseFloat(ratingMatch[1]) : undefined
+
+  // Review count: id="acrCustomerReviewText"
+  const reviewMatch = html.match(/id="acrCustomerReviewText"[^>]*>([\d,]+)/)
+  const reviewCount = reviewMatch ? parseInt(reviewMatch[1].replace(/,/g, "")) : undefined
+
+  return { price, inStock, rating, reviewCount }
+}
+
+async function scrapeAmazonFetch(asin: string): Promise<{ price: number; inStock: boolean; rating?: number; reviewCount?: number } | null> {
+  const html = await fetchAmazonHtml(asin)
+  if (!html) return null
+  return parseAmazonHtml(html)
+}
+
 const PRODUCTS_DIR = path.join(process.cwd(), "data", "products")
 
 const DATA_DIR = path.join(process.cwd(), "data")
@@ -148,18 +234,20 @@ async function main() {
 
   const page = await context.newPage()
 
-  // Warm up: visit Amazon homepage first to get cookies before hitting product pages
-  await page.goto("https://www.amazon.com", { waitUntil: "domcontentloaded", timeout: 20000 })
-  await page.waitForTimeout(2000 + Math.random() * 1000)
+  // Warm up: fetch Amazon homepage via HTTP to seed cookie jar before product pages
+  console.log("Warming up cookie jar...")
+  const warmRes = await fetch("https://www.amazon.com", { headers: FETCH_HEADERS, redirect: "follow" }).catch(() => null)
+  if (warmRes) cookieJar.update(warmRes.headers)
+  await new Promise((r) => setTimeout(r, 2000 + Math.random() * 1000))
 
   console.log(`\nScraping ${products.length} products for ${TODAY}...\n`)
 
   for (const product of products) {
     console.log(`→ ${product.name}`)
 
-    // Try Amazon first
+    // Try Amazon via HTTP fetch first (no browser fingerprint)
     if (product.amazon_asin) {
-      const result = await scrapeAmazon(page, product.amazon_asin)
+      const result = await scrapeAmazonFetch(product.amazon_asin)
       if (result) {
         savePrice(product.slug, {
           date: TODAY,
@@ -172,13 +260,11 @@ async function main() {
           updateProductRating(product.slug, result.rating, result.reviewCount)
           console.log(`  [rating] ${result.rating}★ (${result.reviewCount.toLocaleString()} reviews)`)
         }
-        // Polite delay
-        await page.waitForTimeout(2000 + Math.random() * 2000)
+        await new Promise((r) => setTimeout(r, 1500 + Math.random() * 1500))
         continue
       }
-      console.warn(`  [warn] Amazon failed for ${product.slug}, trying B&H...`)
-      // Delay even on failure — rapid consecutive requests trigger bot detection
-      await page.waitForTimeout(3000 + Math.random() * 2000)
+      console.warn(`  [warn] Amazon fetch failed for ${product.slug}, trying B&H...`)
+      await new Promise((r) => setTimeout(r, 2000 + Math.random() * 1000))
     }
 
     // Fallback: B&H
