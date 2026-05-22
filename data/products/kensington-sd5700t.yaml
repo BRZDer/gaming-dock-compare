@@ -3,7 +3,7 @@ name: Kensington SD5700T Thunderbolt 4 Dual 4K Dock
 brand: Kensington
 category: thunderbolt-4
 msrp_usd: 379
-amazon_asin: B09B37PSPM
+amazon_asin: B08KRTKX9V
 specs:
   ports:
     usb_a: 4
@@ -18,4 +18,4 @@ specs:
   max_displays: 2
   host_interface: thunderbolt-4
 reviews:
-  amazon_asin: B09B37PSPM
+  amazon_asin: B08KRTKX9V

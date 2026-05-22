@@ -3,7 +3,7 @@ name: Anker 575 USB-C Docking Station (13-in-1)
 brand: Anker
 category: usb-c
 msrp_usd: 149
-amazon_asin: B0932T7BCC
+amazon_asin: B088F7SY6S
 specs:
   ports:
     usb_a: 5
@@ -18,4 +18,4 @@ specs:
   max_displays: 2
   host_interface: usb-c
 reviews:
-  amazon_asin: B0932T7BCC
+  amazon_asin: B088F7SY6S

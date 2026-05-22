@@ -3,7 +3,7 @@ name: Satechi Thunderbolt 4 Slim Hub
 brand: Satechi
 category: thunderbolt-4
 msrp_usd: 199
-amazon_asin: B09BW5LNHH
+amazon_asin: B0CRZXQ9D3
 specs:
   ports:
     usb_a: 3
@@ -18,4 +18,4 @@ specs:
   max_displays: 2
   host_interface: thunderbolt-4
 reviews:
-  amazon_asin: B09BW5LNHH
+  amazon_asin: B0CRZXQ9D3

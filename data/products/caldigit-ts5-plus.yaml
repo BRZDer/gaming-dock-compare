@@ -3,7 +3,7 @@ name: CalDigit TS5 Plus Thunderbolt 5 Dock
 brand: CalDigit
 category: thunderbolt-5
 msrp_usd: 499
-amazon_asin: B0CTGVQPHY
+amazon_asin: B0F2GQZXVL
 specs:
   ports:
     usb_a: 5
@@ -18,7 +18,7 @@ specs:
   max_displays: 3
   host_interface: thunderbolt-5
 reviews:
-  amazon_asin: B0CTGVQPHY
+  amazon_asin: B0F2GQZXVL
   tomshardware_url: >-
     https://www.tomshardware.com/peripherals/docking-stations-hubs/testing-the-top-thunderbolt-5-docks-with-up-to-140w-power-delivery-10-gbe-and-even-internal-m-2-ssd-slots-razer-caldigit-hyper-ivanky-and-wavlink-go-head-to-head
   wirecutter_pick: false

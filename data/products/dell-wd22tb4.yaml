@@ -3,7 +3,7 @@ name: Dell Thunderbolt Dock WD22TB4
 brand: Dell
 category: thunderbolt-4
 msrp_usd: 329
-amazon_asin: B09QVR37S9
+amazon_asin: B0B13Y2QVW
 specs:
   ports:
     usb_a: 4
@@ -18,4 +18,4 @@ specs:
   max_displays: 4
   host_interface: thunderbolt-4
 reviews:
-  amazon_asin: B09QVR37S9
+  amazon_asin: B0B13Y2QVW

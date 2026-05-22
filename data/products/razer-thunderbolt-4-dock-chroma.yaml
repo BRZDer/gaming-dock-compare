@@ -3,7 +3,7 @@ name: Razer Thunderbolt 4 Dock Chroma
 brand: Razer
 category: thunderbolt-4
 msrp_usd: 329
-amazon_asin: B09C7SLHFP
+amazon_asin: B091BML59Y
 specs:
   ports:
     usb_a: 4
@@ -19,4 +19,4 @@ specs:
   host_interface: thunderbolt-4
   weight_g: 454
 reviews:
-  amazon_asin: B09C7SLHFP
+  amazon_asin: B091BML59Y

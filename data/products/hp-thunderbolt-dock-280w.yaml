@@ -3,7 +3,7 @@ name: HP Thunderbolt Dock 280W G4
 brand: HP
 category: thunderbolt-4
 msrp_usd: 299
-amazon_asin: B0B3N8QNCP
+amazon_asin: B0B619S53K
 specs:
   ports:
     usb_a: 4
@@ -18,4 +18,4 @@ specs:
   max_displays: 4
   host_interface: thunderbolt-4
 reviews:
-  amazon_asin: B0B3N8QNCP
+  amazon_asin: B0B619S53K

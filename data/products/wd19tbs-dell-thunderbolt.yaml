@@ -3,7 +3,7 @@ name: Dell Thunderbolt Dock WD19TBS
 brand: Dell
 category: thunderbolt-3
 msrp_usd: 279
-amazon_asin: B08C4S6D7J
+amazon_asin: B0916F5DTM
 specs:
   ports:
     usb_a: 3
@@ -18,4 +18,4 @@ specs:
   max_displays: 3
   host_interface: thunderbolt-3
 reviews:
-  amazon_asin: B08C4S6D7J
+  amazon_asin: B0916F5DTM

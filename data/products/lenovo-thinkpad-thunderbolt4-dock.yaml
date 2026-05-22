@@ -3,7 +3,7 @@ name: Lenovo ThinkPad Thunderbolt 4 Workstation Dock
 brand: Lenovo
 category: thunderbolt-4
 msrp_usd: 349
-amazon_asin: B09G11D1B7
+amazon_asin: B09GJJ5C32
 specs:
   ports:
     usb_a: 4
@@ -18,4 +18,4 @@ specs:
   max_displays: 4
   host_interface: thunderbolt-4
 reviews:
-  amazon_asin: B09G11D1B7
+  amazon_asin: B09GJJ5C32

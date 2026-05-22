@@ -3,7 +3,7 @@ name: Elgato Thunderbolt 3 Mini Dock
 brand: Elgato
 category: thunderbolt-3
 msrp_usd: 129
-amazon_asin: B07K72STFB
+amazon_asin: B01MZ2ATGK
 specs:
   ports:
     usb_a: 2
@@ -18,4 +18,4 @@ specs:
   max_displays: 1
   host_interface: thunderbolt-3
 reviews:
-  amazon_asin: B07K72STFB
+  amazon_asin: B01MZ2ATGK

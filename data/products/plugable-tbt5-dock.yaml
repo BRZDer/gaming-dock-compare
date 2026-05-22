@@ -3,7 +3,7 @@ name: Plugable Thunderbolt 5 Dock (14-in-1)
 brand: Plugable
 category: thunderbolt-5
 msrp_usd: 349
-amazon_asin: B0CX1F7F5P
+amazon_asin: B0F96ZVSKM
 specs:
   ports:
     usb_a: 4
@@ -18,4 +18,4 @@ specs:
   max_displays: 3
   host_interface: thunderbolt-5
 reviews:
-  amazon_asin: B0CX1F7F5P
+  amazon_asin: B0F96ZVSKM
