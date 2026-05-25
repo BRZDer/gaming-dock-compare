@@ -274,6 +274,12 @@ async function main() {
   for (const product of products) {
     console.log(`→ ${product.name}`)
 
+    // Skip products with no price sources configured
+    if (!product.amazon_asin && !product.bh_sku) {
+      console.log(`  [skip] ${product.slug} — no price source (manual only)`)
+      continue
+    }
+
     // Try Amazon via HTTP fetch first (no browser fingerprint)
     if (product.amazon_asin) {
       const result = await scrapeAmazonFetch(product.amazon_asin)

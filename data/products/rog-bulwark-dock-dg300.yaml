@@ -1,0 +1,21 @@
+slug: rog-bulwark-dock-dg300
+name: ROG Bulwark Dock (2025) DG300
+brand: ASUS
+category: usb-c
+msrp_usd: 139
+specs:
+  ports:
+    usb_a: 3
+    usb_c: 1
+    thunderbolt: 0
+    hdmi: 1
+    displayport: 0
+    ethernet: 1
+    sd_card: 0
+    audio: 1
+  power_delivery_w: 100
+  max_displays: 1
+  host_interface: usb-c
+reviews:
+  amazon_rating: null
+  amazon_review_count: null
