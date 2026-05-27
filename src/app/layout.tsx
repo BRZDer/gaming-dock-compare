@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import fs from "fs";
+import path from "path";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,6 +15,28 @@ const geistMono = Geist_Mono({
 });
 
 const BASE_URL = "https://gaming-dock-compare.vercel.app"
+
+function getLatestUpdate(): string {
+  try {
+    const pricesDir = path.join(process.cwd(), "data/prices")
+    let latestMtime = 0
+    for (const slug of fs.readdirSync(pricesDir)) {
+      const slugDir = path.join(pricesDir, slug)
+      for (const file of fs.readdirSync(slugDir).filter(f => f.endsWith(".json"))) {
+        const mtime = fs.statSync(path.join(slugDir, file)).mtimeMs
+        if (mtime > latestMtime) latestMtime = mtime
+      }
+    }
+    if (!latestMtime) return ""
+    return new Date(latestMtime).toLocaleString("en-US", {
+      month: "short", day: "numeric", year: "numeric",
+      hour: "2-digit", minute: "2-digit", timeZone: "America/New_York",
+      timeZoneName: "short",
+    })
+  } catch {
+    return ""
+  }
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -41,6 +65,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const lastUpdated = getLatestUpdate()
   return (
     <html
       lang="en"
@@ -50,10 +75,15 @@ export default function RootLayout({
         <header className="border-b">
           <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
             <a href="/" className="font-bold text-lg tracking-tight">GamingDockCompare</a>
-            <nav className="flex gap-4 text-sm">
-              <a href="/" className="hover:underline text-muted-foreground hover:text-foreground transition-colors">All Docks</a>
-              <a href="/compare" className="hover:underline text-muted-foreground hover:text-foreground transition-colors">Compare</a>
-            </nav>
+            <div className="flex items-center gap-6">
+              <nav className="flex gap-4 text-sm">
+                <a href="/" className="hover:underline text-muted-foreground hover:text-foreground transition-colors">All Docks</a>
+                <a href="/compare" className="hover:underline text-muted-foreground hover:text-foreground transition-colors">Compare</a>
+              </nav>
+              {lastUpdated && (
+                <span className="text-xs text-muted-foreground hidden sm:block">Updated {lastUpdated}</span>
+              )}
+            </div>
           </div>
         </header>
         {children}
