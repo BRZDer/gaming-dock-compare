@@ -19,19 +19,20 @@ const BASE_URL = "https://gaming-dock-compare.vercel.app"
 function getLatestUpdate(): string {
   try {
     const pricesDir = path.join(process.cwd(), "data/prices")
-    let latestMtime = 0
+    const dates: string[] = []
     for (const slug of fs.readdirSync(pricesDir)) {
       const slugDir = path.join(pricesDir, slug)
-      for (const file of fs.readdirSync(slugDir).filter(f => f.endsWith(".json"))) {
-        const mtime = fs.statSync(path.join(slugDir, file)).mtimeMs
-        if (mtime > latestMtime) latestMtime = mtime
+      if (!fs.statSync(slugDir).isDirectory()) continue
+      for (const file of fs.readdirSync(slugDir)) {
+        if (/^\d{4}-\d{2}-\d{2}\.json$/.test(file)) dates.push(file.slice(0, 10))
       }
     }
-    if (!latestMtime) return ""
-    return new Date(latestMtime).toLocaleString("en-US", {
-      month: "short", day: "numeric", year: "numeric",
-      hour: "2-digit", minute: "2-digit", timeZone: "America/New_York",
-      timeZoneName: "short",
+    if (dates.length === 0) return ""
+    dates.sort()
+    const latest = dates[dates.length - 1]
+    const [y, m, d] = latest.split("-").map(Number)
+    return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("en-US", {
+      month: "short", day: "numeric", year: "numeric", timeZone: "UTC",
     })
   } catch {
     return ""
