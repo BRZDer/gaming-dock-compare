@@ -11,7 +11,7 @@ export interface ProductSpecs {
   }
   power_delivery_w: number
   max_displays: number
-  host_interface: "thunderbolt-5" | "thunderbolt-4" | "thunderbolt-3" | "usb-c" | "usb-a"
+  host_interface: "thunderbolt-5" | "thunderbolt-4" | "thunderbolt-3" | "usb4" | "usb3" | "usb-a"
   dimensions_mm?: [number, number, number]
   weight_g?: number
 }
@@ -43,7 +43,7 @@ export interface Product {
 export interface PriceSnapshot {
   date: string
   price_usd: number
-  source: "amazon" | "bh" | "newegg" | "manual"
+  source: "amazon" | "bh" | "newegg" | "bestbuy" | "manual"
   in_stock: boolean
   affiliate_url?: string
 }

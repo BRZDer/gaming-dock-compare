@@ -1,7 +1,7 @@
 slug: plugable-usbc-triple-display
 name: Plugable USB-C Triple Display Docking Station
 brand: Plugable
-category: usb-c
+category: usb3
 msrp_usd: 199
 amazon_asin: B0779K9DG2
 specs:
@@ -16,7 +16,7 @@ specs:
     audio: 2
   power_delivery_w: 96
   max_displays: 3
-  host_interface: usb-c
+  host_interface: usb3
 reviews:
   amazon_asin: B0779K9DG2
   amazon_rating: 4.2

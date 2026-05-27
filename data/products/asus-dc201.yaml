@@ -1,0 +1,23 @@
+slug: asus-dc201
+name: ASUS Dual 4K USB-C Dock DC201
+brand: ASUS
+category: usb3
+msrp_usd: 129
+amazon_asin: B0DRDJX1SR
+specs:
+  ports:
+    usb_a: 1
+    usb_c: 2
+    thunderbolt: 0
+    hdmi: 1
+    displayport: 0
+    ethernet: 1
+    sd_card: 0
+    audio: 0
+  power_delivery_w: 100
+  max_displays: 2
+  host_interface: usb3
+reviews:
+  amazon_asin: B0DRDJX1SR
+  amazon_rating: 4.2
+  amazon_review_count: 6

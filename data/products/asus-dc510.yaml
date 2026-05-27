@@ -1,0 +1,21 @@
+slug: asus-dc510
+name: ASUS Master Thunderbolt 5 Dock DC510
+brand: ASUS
+category: thunderbolt-5
+msrp_usd: 449
+amazon_asin: B0FH2QDM4W
+specs:
+  ports:
+    usb_a: 4
+    usb_c: 2
+    thunderbolt: 2
+    hdmi: 0
+    displayport: 0
+    ethernet: 1
+    sd_card: 2
+    audio: 1
+  power_delivery_w: 140
+  max_displays: 3
+  host_interface: thunderbolt-5
+reviews:
+  amazon_asin: B0FH2QDM4W

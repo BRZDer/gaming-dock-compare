@@ -1,7 +1,7 @@
 import { ProductWithPrices } from "@/types/product"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { getBandwidth, getMaxResolution } from "@/lib/specs"
+import { getBandwidth, getMaxResolution, getInterfaceLabel } from "@/lib/specs"
 
 interface Props {
   product: ProductWithPrices
@@ -21,8 +21,8 @@ export function ProductCard({ product }: Props) {
       <CardHeader className="pb-2">
         <div className="flex items-start justify-between gap-2">
           <CardTitle className="text-base leading-tight">{name}</CardTitle>
-          <Badge variant="secondary" className="shrink-0 capitalize">
-            {category.replace("-", " ")}
+          <Badge variant="secondary" className="shrink-0">
+            {getInterfaceLabel(category)}
           </Badge>
         </div>
         <p className="text-sm text-muted-foreground">{brand}</p>
@@ -38,7 +38,7 @@ export function ProductCard({ product }: Props) {
 
         <div className="grid grid-cols-2 gap-1 text-sm">
           <span className="text-muted-foreground">Interface</span>
-          <span className="font-medium capitalize">{specs.host_interface.replace(/-/g, " ")}</span>
+          <span className="font-medium">{getInterfaceLabel(specs.host_interface)}</span>
           <span className="text-muted-foreground">Transfer Speed</span>
           <span className="font-medium">{getBandwidth(specs)}</span>
           <span className="text-muted-foreground">Power Delivery</span>

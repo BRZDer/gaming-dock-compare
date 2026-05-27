@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 import { loadAllProducts, loadProductWithPrices } from "@/lib/data/loader"
 import { PriceHistoryChart } from "@/components/charts/PriceHistoryChart"
 import { Badge } from "@/components/ui/badge"
-import { getBandwidth, getMaxResolution } from "@/lib/specs"
+import { getBandwidth, getMaxResolution, getInterfaceLabel } from "@/lib/specs"
 import type { Metadata } from "next"
 
 export const revalidate = 86400
@@ -62,8 +62,8 @@ export default async function ProductPage({
         {/* Left: price + buy */}
         <div className="md:col-span-1 space-y-4">
           <div>
-            <Badge variant="secondary" className="capitalize mb-2">
-              {category.replace("-", " ")}
+            <Badge variant="secondary" className="mb-2">
+              {getInterfaceLabel(category)}
             </Badge>
             <h1 className="text-2xl font-bold leading-tight">{name}</h1>
             <p className="text-muted-foreground">{brand}</p>
@@ -81,7 +81,9 @@ export default async function ProductPage({
               rel="noopener noreferrer sponsored"
               className="block w-full text-center rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
             >
-              Buy on Amazon →
+              {current_price.source === "bestbuy" ? "Buy on Best Buy →"
+                : current_price.source === "manual" ? "Buy →"
+                : "Buy on Amazon →"}
             </a>
           )}
 
@@ -104,8 +106,8 @@ export default async function ProductPage({
                 <tbody>
                   <tr className="border-b">
                     <td className="px-4 py-2.5 text-muted-foreground w-1/2">Host Interface</td>
-                    <td className="px-4 py-2.5 font-medium capitalize">
-                      {specs.host_interface.replace(/-/g, " ")}
+                    <td className="px-4 py-2.5 font-medium">
+                      {getInterfaceLabel(specs.host_interface)}
                     </td>
                   </tr>
                   <tr className="border-b bg-muted/30">

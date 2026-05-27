@@ -1,0 +1,23 @@
+slug: asus-dc500
+name: ASUS Triple 4K Thunderbolt 4 Dock DC500
+brand: ASUS
+category: thunderbolt-4
+msrp_usd: 349
+amazon_asin: B0DHYKHCRJ
+specs:
+  ports:
+    usb_a: 4
+    usb_c: 1
+    thunderbolt: 0
+    hdmi: 2
+    displayport: 0
+    ethernet: 1
+    sd_card: 2
+    audio: 1
+  power_delivery_w: 96
+  max_displays: 3
+  host_interface: thunderbolt-4
+reviews:
+  amazon_asin: B0DHYKHCRJ
+  amazon_rating: 4.4
+  amazon_review_count: 4

@@ -1,7 +1,7 @@
 slug: baseus-17in1-usbc-dock
 name: Baseus 17-in-1 USB-C Docking Station
 brand: Baseus
-category: usb-c
+category: usb3
 msrp_usd: 89
 amazon_asin: B0CZ6ZPZ1R
 specs:
@@ -16,7 +16,7 @@ specs:
     audio: 1
   power_delivery_w: 100
   max_displays: 2
-  host_interface: usb-c
+  host_interface: usb3
 reviews:
   amazon_asin: B0CZ6ZPZ1R
   amazon_rating: 4.3

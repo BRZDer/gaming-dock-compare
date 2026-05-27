@@ -1,0 +1,23 @@
+slug: asus-dc301
+name: ASUS Triple Display USB-C Dock Duo DC301
+brand: ASUS
+category: usb3
+msrp_usd: 279
+amazon_asin: B0FT3KNR1L
+specs:
+  ports:
+    usb_a: 3
+    usb_c: 2
+    thunderbolt: 0
+    hdmi: 1
+    displayport: 2
+    ethernet: 1
+    sd_card: 1
+    audio: 1
+  power_delivery_w: 90
+  max_displays: 3
+  host_interface: usb3
+reviews:
+  amazon_asin: B0FT3KNR1L
+  amazon_rating: 3.5
+  amazon_review_count: 0

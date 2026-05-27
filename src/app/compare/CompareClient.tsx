@@ -3,12 +3,13 @@
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { useCallback, useMemo } from "react"
 import { ProductWithPrices } from "@/types/product"
+import { getInterfaceLabel } from "@/lib/specs"
 
 const MAX_COMPARE = 4
 
 const SPEC_ROWS: { key: string; label: string; getValue: (p: ProductWithPrices) => string | number }[] = [
   { key: "price",     label: "Price",           getValue: (p) => p.current_price?.price_usd ?? p.msrp_usd },
-  { key: "interface", label: "Interface",        getValue: (p) => p.specs.host_interface.replace(/-/g, " ") },
+  { key: "interface", label: "Interface",        getValue: (p) => getInterfaceLabel(p.specs.host_interface) },
   { key: "power",     label: "Power Delivery",   getValue: (p) => `${p.specs.power_delivery_w}W` },
   { key: "displays",  label: "Max Displays",     getValue: (p) => p.specs.max_displays },
   { key: "tb",        label: "Thunderbolt Ports", getValue: (p) => p.specs.ports.thunderbolt ?? 0 },

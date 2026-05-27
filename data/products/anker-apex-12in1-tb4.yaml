@@ -1,7 +1,7 @@
 slug: anker-apex-12in1-tb4
 name: Anker Prime Docking Station DL7400
 brand: Anker
-category: usb-c
+category: usb3
 msrp_usd: 229
 amazon_asin: B0DTSZC5Y7
 specs:
@@ -16,7 +16,7 @@ specs:
     audio: 1
   power_delivery_w: 140
   max_displays: 3
-  host_interface: usb-c
+  host_interface: usb3
 reviews:
   amazon_asin: B0DTSZC5Y7
   amazon_rating: 4.4
