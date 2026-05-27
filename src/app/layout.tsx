@@ -22,7 +22,7 @@ function getLatestUpdate(): string {
     const { updated_at } = JSON.parse(fs.readFileSync(file, "utf-8"))
     return new Date(updated_at).toLocaleString("en-US", {
       month: "short", day: "numeric", year: "numeric",
-      hour: "2-digit", minute: "2-digit", timeZone: "UTC",
+      hour: "2-digit", minute: "2-digit", timeZone: "Asia/Taipei",
       timeZoneName: "short",
     })
   } catch {
