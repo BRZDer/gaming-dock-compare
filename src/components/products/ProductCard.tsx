@@ -1,7 +1,10 @@
+"use client"
+
 import { ProductWithPrices } from "@/types/product"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { getBandwidth, getMaxResolution, getInterfaceLabel } from "@/lib/specs"
+import { useCompare } from "@/components/compare/CompareProvider"
 
 interface Props {
   product: ProductWithPrices
@@ -9,6 +12,9 @@ interface Props {
 
 export function ProductCard({ product }: Props) {
   const { name, brand, category, specs, current_price } = product
+  const { selected, toggle } = useCompare()
+  const isSelected = selected.includes(product.slug)
+
   const totalPorts =
     (specs.ports.usb_a ?? 0) +
     (specs.ports.usb_c ?? 0) +
@@ -17,8 +23,29 @@ export function ProductCard({ product }: Props) {
     (specs.ports.displayport ?? 0)
 
   return (
-    <Card className="flex flex-col h-full">
-      <CardHeader className="pb-2">
+    <Card
+      className={`flex flex-col h-full relative transition-all ${
+        isSelected ? "ring-2 ring-primary" : ""
+      }`}
+    >
+      {/* Checkbox */}
+      <button
+        onClick={() => toggle(product.slug)}
+        aria-label={isSelected ? `Deselect ${name}` : `Select ${name} for comparison`}
+        className={`absolute top-2 left-2 z-10 w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${
+          isSelected
+            ? "bg-primary border-primary text-primary-foreground"
+            : "bg-background border-input hover:border-primary"
+        }`}
+      >
+        {isSelected && (
+          <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+            <path d="M1 4L3.5 6.5L9 1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        )}
+      </button>
+
+      <CardHeader className="pb-2 pl-9">
         <div className="flex items-start justify-between gap-2">
           <CardTitle className="text-base leading-tight">{name}</CardTitle>
           <Badge variant="secondary" className="shrink-0">
@@ -49,7 +76,6 @@ export function ProductCard({ product }: Props) {
           <span className="font-medium">{specs.max_displays} ({getMaxResolution(specs)})</span>
         </div>
 
-        {/* Amazon star rating */}
         {product.reviews?.amazon_rating !== undefined && (
           <div className="flex items-center gap-1.5 text-sm">
             <span className="text-amber-400">{"★".repeat(Math.round(product.reviews.amazon_rating))}{"☆".repeat(5 - Math.round(product.reviews.amazon_rating))}</span>
@@ -60,7 +86,6 @@ export function ProductCard({ product }: Props) {
           </div>
         )}
 
-        {/* Review links */}
         {(product.reviews?.tomshardware_url || product.reviews?.pcworld_url) && (
           <div className="flex gap-2 flex-wrap text-xs">
             {product.reviews.tomshardware_url && (

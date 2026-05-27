@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import fs from "fs";
 import path from "path";
+import { CompareProvider } from "@/components/compare/CompareProvider";
+import { CompareButton } from "@/components/compare/CompareButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -64,10 +66,12 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <CompareProvider>
         <header className="border-b">
           <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
             <a href="/" className="font-bold text-lg tracking-tight">GamingDockCompare</a>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4">
+              <CompareButton />
               <nav className="flex gap-4 text-sm">
                 <a href="/" className="hover:underline text-muted-foreground hover:text-foreground transition-colors">All Docks</a>
                 <a href="/compare" className="hover:underline text-muted-foreground hover:text-foreground transition-colors">Compare</a>
@@ -85,6 +89,7 @@ export default function RootLayout({
             <span>As an Amazon Associate I earn from qualifying purchases.</span>
           </div>
         </footer>
+        </CompareProvider>
       </body>
     </html>
   );
