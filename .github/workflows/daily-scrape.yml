@@ -37,6 +37,7 @@ jobs:
           git add -f data/prices/
           git add data/products/ data/last-updated.json
           git diff --cached --quiet || git commit -m "chore: daily price + rating update $(date -u +%Y-%m-%d)"
+          git pull --rebase origin main
           git push
 
       - name: Trigger Vercel redeploy
