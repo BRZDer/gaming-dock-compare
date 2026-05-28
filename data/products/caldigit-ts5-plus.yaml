@@ -17,6 +17,7 @@ specs:
     vga: 0
     usb_c_data: 3
     usb_c_display: 0
+    usb_c_data_detail: 3× 10Gbps
   power_delivery_w: 140
   max_displays: 3
   host_interface: thunderbolt-5
