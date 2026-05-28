@@ -112,8 +112,8 @@ export function ProductCard({ product, visibleSpecs }: Props) {
       </button>
 
       <CardHeader className="pb-2 pl-9">
-        <div className="flex items-start justify-between gap-2">
-          <CardTitle className="text-base leading-tight">{name}</CardTitle>
+        <div className="flex items-start justify-between gap-2 min-h-[2.5rem]">
+          <CardTitle className="text-base leading-tight line-clamp-2">{name}</CardTitle>
           <Badge variant="secondary" className="shrink-0">
             {getInterfaceLabel(category)}
           </Badge>
