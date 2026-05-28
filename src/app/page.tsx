@@ -1,7 +1,6 @@
 import { Suspense } from "react"
 import { loadAllProductsWithPrices } from "@/lib/data/loader"
-import { ProductFilters } from "@/components/filters/ProductFilters"
-import { ProductGrid } from "@/components/products/ProductGrid"
+import { HomePageClient } from "@/components/products/HomePageClient"
 
 export const revalidate = 86400
 
@@ -19,9 +18,7 @@ export default function HomePage() {
       </div>
 
       <Suspense>
-        <ProductFilters brands={brands} />
-        <p className="text-sm text-muted-foreground mb-4">{products.length} products</p>
-        <ProductGrid products={products} />
+        <HomePageClient products={products} brands={brands} />
       </Suspense>
     </main>
   )

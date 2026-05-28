@@ -7,9 +7,10 @@ import { ProductCard } from "./ProductCard"
 
 interface Props {
   products: ProductWithPrices[]
+  visibleSpecs?: Set<string>
 }
 
-export function ProductGrid({ products }: Props) {
+export function ProductGrid({ products, visibleSpecs }: Props) {
   const params = useSearchParams()
 
   const filtered = useMemo(() => {
@@ -57,7 +58,7 @@ export function ProductGrid({ products }: Props) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {filtered.map((p) => (
-        <ProductCard key={p.slug} product={p} />
+        <ProductCard key={p.slug} product={p} visibleSpecs={visibleSpecs} />
       ))}
     </div>
   )

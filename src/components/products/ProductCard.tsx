@@ -6,11 +6,34 @@ import { Badge } from "@/components/ui/badge"
 import { getBandwidth, getMaxResolution, getInterfaceLabel } from "@/lib/specs"
 import { useCompare } from "@/components/compare/CompareProvider"
 
+const CARD_SPEC_ROWS: { key: string; label: string }[] = [
+  { key: "interface",  label: "Interface" },
+  { key: "speed",      label: "Transfer Speed" },
+  { key: "power",      label: "Power Delivery" },
+  { key: "ports",      label: "Total Ports" },
+  { key: "displays",   label: "Max Displays" },
+  { key: "hdmi",       label: "HDMI" },
+  { key: "dp",         label: "DisplayPort" },
+  { key: "tb",         label: "Thunderbolt" },
+  { key: "usba",       label: "USB-A" },
+  { key: "usbc_data",  label: "USB-C (Data)" },
+  { key: "usbc_disp",  label: "USB-C (Display)" },
+  { key: "eth",        label: "Ethernet" },
+  { key: "audio",      label: "Audio Jack" },
+  { key: "sd",         label: "SD Card" },
+  { key: "microsd",    label: "microSD" },
+  { key: "klock",      label: "Kensington Lock" },
+  { key: "weight",     label: "Weight" },
+]
+
+const DEFAULT_VISIBLE = new Set(["interface", "speed", "power", "ports", "displays"])
+
 interface Props {
   product: ProductWithPrices
+  visibleSpecs?: Set<string>
 }
 
-export function ProductCard({ product }: Props) {
+export function ProductCard({ product, visibleSpecs }: Props) {
   const { name, brand, category, specs, current_price } = product
   const { selected, toggle } = useCompare()
   const isSelected = selected.includes(product.slug)
@@ -22,6 +45,30 @@ export function ProductCard({ product }: Props) {
     (specs.ports.thunderbolt ?? 0) +
     (specs.ports.hdmi ?? 0) +
     (specs.ports.displayport ?? 0)
+
+  const effective = visibleSpecs ?? DEFAULT_VISIBLE
+
+  const specValues: Record<string, string | number> = {
+    interface:  getInterfaceLabel(specs.host_interface),
+    speed:      getBandwidth(specs),
+    power:      `${specs.power_delivery_w}W`,
+    ports:      totalPorts,
+    displays:   `${specs.max_displays} (${getMaxResolution(specs)})`,
+    hdmi:       specs.ports.hdmi ?? 0,
+    dp:         specs.ports.displayport ?? 0,
+    tb:         specs.ports.thunderbolt ?? 0,
+    usba:       specs.ports.usb_a ?? 0,
+    usbc_data:  specs.ports.usb_c_data ?? 0,
+    usbc_disp:  specs.ports.usb_c_display ?? 0,
+    eth:        specs.ports.ethernet ? "Yes" : "No",
+    audio:      specs.ports.audio ? `${specs.ports.audio}` : "No",
+    sd:         specs.ports.sd_card ? "Yes" : "No",
+    microsd:    specs.ports.microsd ? "Yes" : "No",
+    klock:      specs.kensington_lock ? "Yes" : "No",
+    weight:     specs.weight_g ? `${specs.weight_g}g` : "—",
+  }
+
+  const visibleRows = CARD_SPEC_ROWS.filter((r) => effective.has(r.key))
 
   return (
     <Card
@@ -64,18 +111,16 @@ export function ProductCard({ product }: Props) {
           )}
         </div>
 
-        <div className="grid grid-cols-2 gap-1 text-sm">
-          <span className="text-muted-foreground">Interface</span>
-          <span className="font-medium">{getInterfaceLabel(specs.host_interface)}</span>
-          <span className="text-muted-foreground">Transfer Speed</span>
-          <span className="font-medium">{getBandwidth(specs)}</span>
-          <span className="text-muted-foreground">Power Delivery</span>
-          <span className="font-medium">{specs.power_delivery_w}W</span>
-          <span className="text-muted-foreground">Total Ports</span>
-          <span className="font-medium">{totalPorts}</span>
-          <span className="text-muted-foreground">Max Displays</span>
-          <span className="font-medium">{specs.max_displays} ({getMaxResolution(specs)})</span>
-        </div>
+        {visibleRows.length > 0 && (
+          <div className="grid grid-cols-2 gap-1 text-sm">
+            {visibleRows.map((row) => (
+              <>
+                <span key={`${row.key}-label`} className="text-muted-foreground">{row.label}</span>
+                <span key={`${row.key}-value`} className="font-medium">{specValues[row.key]}</span>
+              </>
+            ))}
+          </div>
+        )}
 
         {product.reviews?.amazon_rating !== undefined && (
           <div className="flex items-center gap-1.5 text-sm">
