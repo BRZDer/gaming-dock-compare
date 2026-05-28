@@ -9,7 +9,7 @@ export default function HomePage() {
   const brands = [...new Set(products.map((p) => p.brand))].sort()
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-10">
+    <main className="max-w-7xl mx-auto px-4 py-10 min-h-screen">
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight">Gaming Dock Compare</h1>
         <p className="text-muted-foreground mt-2">
