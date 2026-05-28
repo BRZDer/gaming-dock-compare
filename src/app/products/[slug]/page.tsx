@@ -45,6 +45,7 @@ export default async function ProductPage({
     { label: "USB-C", value: specs.ports.usb_c },
     { label: "HDMI", value: specs.ports.hdmi },
     { label: "DisplayPort", value: specs.ports.displayport },
+    { label: "VGA", value: specs.ports.vga },
     { label: "Ethernet", value: specs.ports.ethernet },
     { label: "SD Card", value: specs.ports.sd_card },
     { label: "microSD", value: specs.ports.microsd },
@@ -141,10 +142,48 @@ export default async function ProductPage({
                     <td className="px-4 py-2.5 text-muted-foreground">Kensington Lock</td>
                     <td className="px-4 py-2.5 font-medium">{specs.kensington_lock ? "Yes" : "No"}</td>
                   </tr>
+                  {specs.display_resolution && (
+                    <tr className="border-b bg-muted/30">
+                      <td className="px-4 py-2.5 text-muted-foreground">Display Resolution</td>
+                      <td className="px-4 py-2.5 font-medium">{specs.display_resolution}</td>
+                    </tr>
+                  )}
+                  {specs.ports.vga ? (
+                    <tr className="border-b">
+                      <td className="px-4 py-2.5 text-muted-foreground">VGA</td>
+                      <td className="px-4 py-2.5 font-medium">{specs.ports.vga}</td>
+                    </tr>
+                  ) : null}
+                  <tr className="border-b bg-muted/30">
+                    <td className="px-4 py-2.5 text-muted-foreground">Power Button</td>
+                    <td className="px-4 py-2.5 font-medium">{specs.power_button ? "Yes" : "No"}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="px-4 py-2.5 text-muted-foreground">Indicator LEDs</td>
+                    <td className="px-4 py-2.5 font-medium">{specs.indicator_leds ? "Yes" : "No"}</td>
+                  </tr>
+                  {specs.compatible_system && (
+                    <tr className="border-b bg-muted/30">
+                      <td className="px-4 py-2.5 text-muted-foreground">Compatible System</td>
+                      <td className="px-4 py-2.5 font-medium">{specs.compatible_system}</td>
+                    </tr>
+                  )}
+                  {specs.supported_os && (
+                    <tr className="border-b">
+                      <td className="px-4 py-2.5 text-muted-foreground">Supported OS</td>
+                      <td className="px-4 py-2.5 font-medium">{specs.supported_os}</td>
+                    </tr>
+                  )}
                   {specs.weight_g && (
-                    <tr>
+                    <tr className="border-b bg-muted/30">
                       <td className="px-4 py-2.5 text-muted-foreground">Weight</td>
                       <td className="px-4 py-2.5 font-medium">{specs.weight_g}g</td>
+                    </tr>
+                  )}
+                  {specs.dimensions_mm && (
+                    <tr>
+                      <td className="px-4 py-2.5 text-muted-foreground">Size</td>
+                      <td className="px-4 py-2.5 font-medium">{specs.dimensions_mm[0]} × {specs.dimensions_mm[1]} × {specs.dimensions_mm[2]} mm</td>
                     </tr>
                   )}
                 </tbody>

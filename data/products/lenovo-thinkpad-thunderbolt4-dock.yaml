@@ -15,11 +15,22 @@ specs:
     sd_card: 0
     microsd: 0
     audio: 2
+    vga: 0
   power_delivery_w: 135
   max_displays: 4
   host_interface: thunderbolt-4
   kensington_lock: false
   power_input_w: 135
+  display_resolution: Up to 4x 4K@60Hz
+  power_button: false
+  indicator_leds: true
+  compatible_system: Windows / macOS
+  supported_os: Windows 10/11, macOS
+  dimensions_mm:
+    - 152
+    - 76
+    - 25
+  weight_g: 526
 reviews:
   amazon_asin: B09GJJ5C32
   amazon_rating: 4.3

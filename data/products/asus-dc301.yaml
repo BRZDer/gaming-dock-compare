@@ -15,11 +15,22 @@ specs:
     sd_card: 1
     microsd: 0
     audio: 1
+    vga: 0
   power_delivery_w: 90
   max_displays: 3
   host_interface: usb3
   kensington_lock: false
   power_input_w: 150
+  display_resolution: Triple 4K@30Hz
+  power_button: true
+  indicator_leds: true
+  compatible_system: Windows / macOS
+  supported_os: Windows 10+, macOS 13+
+  dimensions_mm:
+    - 160
+    - 80
+    - 32
+  weight_g: 514
 reviews:
   amazon_asin: B0FT3KNR1L
   amazon_rating: 3.5

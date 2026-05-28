@@ -15,11 +15,22 @@ specs:
     sd_card: 1
     microsd: 0
     audio: 2
+    vga: 0
   power_delivery_w: 100
   max_displays: 4
   host_interface: usb3
   kensington_lock: true
   power_input_w: 100
+  display_resolution: Dual 4K@60Hz (4x video outputs)
+  power_button: true
+  indicator_leds: true
+  compatible_system: Windows / macOS / ChromeOS / Android
+  supported_os: Windows 10/11, macOS, ChromeOS, Android
+  dimensions_mm:
+    - 177
+    - 89
+    - 224
+  weight_g: 1040
 reviews:
   amazon_asin: B09JL3PHBW
   amazon_rating: 4.3

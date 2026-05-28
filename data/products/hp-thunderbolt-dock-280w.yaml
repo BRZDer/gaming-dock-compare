@@ -15,11 +15,22 @@ specs:
     sd_card: 0
     microsd: 0
     audio: 2
+    vga: 0
   power_delivery_w: 100
   max_displays: 4
   host_interface: thunderbolt-4
   kensington_lock: true
   power_input_w: 280
+  display_resolution: Up to 4x 4K@60Hz
+  power_button: true
+  indicator_leds: true
+  compatible_system: Windows / macOS / ChromeOS / Linux
+  supported_os: Windows 10/11, macOS 11.5.2+, ChromeOS, Linux
+  dimensions_mm:
+    - 98
+    - 98
+    - 68
+  weight_g: 798
 reviews:
   amazon_asin: B0B619S53K
   amazon_rating: 4.4

@@ -15,11 +15,22 @@ specs:
     sd_card: 1
     microsd: 0
     audio: 1
+    vga: 0
   power_delivery_w: 130
   max_displays: 4
   host_interface: thunderbolt-4
   kensington_lock: false
   power_input_w: 180
+  display_resolution: Dual 4K@60Hz or single 5K@60Hz
+  power_button: true
+  indicator_leds: true
+  compatible_system: Windows / Linux
+  supported_os: Windows 10/11, Ubuntu 20.04+
+  dimensions_mm:
+    - 205
+    - 90
+    - 29
+  weight_g: 650
 reviews:
   amazon_asin: B0B13Y2QVW
   amazon_rating: 4.4

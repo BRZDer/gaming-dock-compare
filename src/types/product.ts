@@ -5,6 +5,7 @@ export interface ProductSpecs {
     thunderbolt?: number
     displayport?: number
     hdmi?: number
+    vga?: number
     ethernet?: number
     sd_card?: number
     microsd?: number
@@ -13,8 +14,13 @@ export interface ProductSpecs {
   power_delivery_w: number
   power_input_w?: number
   max_displays: number
+  display_resolution?: string
   host_interface: "thunderbolt-5" | "thunderbolt-4" | "thunderbolt-3" | "usb4" | "usb3" | "usb-a"
   kensington_lock?: boolean
+  power_button?: boolean
+  indicator_leds?: boolean
+  compatible_system?: string
+  supported_os?: string
   dimensions_mm?: [number, number, number]
   weight_g?: number
 }

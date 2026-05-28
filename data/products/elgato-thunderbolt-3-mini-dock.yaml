@@ -15,11 +15,17 @@ specs:
     sd_card: 0
     microsd: 0
     audio: 2
+    vga: 0
   power_delivery_w: 45
   max_displays: 1
   host_interface: thunderbolt-3
   kensington_lock: false
   power_input_w: 0
+  display_resolution: Dual 4K@60Hz
+  power_button: false
+  indicator_leds: false
+  compatible_system: Windows / macOS
+  supported_os: Windows 10+, macOS 10.12+
 reviews:
   amazon_asin: B01MZ2ATGK
   amazon_rating: 4

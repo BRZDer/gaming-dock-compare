@@ -15,11 +15,22 @@ specs:
     sd_card: 0
     microsd: 0
     audio: 2
+    vga: 0
   power_delivery_w: 130
   max_displays: 3
   host_interface: thunderbolt-3
   kensington_lock: true
   power_input_w: 130
+  display_resolution: Triple 4K@60Hz (Thunderbolt 3)
+  power_button: true
+  indicator_leds: true
+  compatible_system: Windows / macOS / Linux / ChromeOS
+  supported_os: Windows 10/11, macOS (limited), Ubuntu, ChromeOS
+  dimensions_mm:
+    - 205
+    - 90
+    - 29
+  weight_g: 585
 reviews:
   amazon_asin: B0916F5DTM
   amazon_rating: 4.2

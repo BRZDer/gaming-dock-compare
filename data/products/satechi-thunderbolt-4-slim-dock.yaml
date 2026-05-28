@@ -15,11 +15,22 @@ specs:
     sd_card: 1
     microsd: 0
     audio: 0
+    vga: 0
   power_delivery_w: 60
   max_displays: 2
   host_interface: thunderbolt-4
   kensington_lock: false
   power_input_w: 150
+  display_resolution: Dual 4K@60Hz or single 8K@30Hz
+  power_button: false
+  indicator_leds: false
+  compatible_system: Windows / macOS / Linux / ChromeOS / iPadOS
+  supported_os: Windows 10/11, macOS 10.12+
+  dimensions_mm:
+    - 310
+    - 74
+    - 18
+  weight_g: 241
 reviews:
   amazon_asin: B0CRZXQ9D3
   amazon_rating: 4.3

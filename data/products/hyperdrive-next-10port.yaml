@@ -15,11 +15,22 @@ specs:
     sd_card: 1
     microsd: 1
     audio: 1
+    vga: 0
   power_delivery_w: 100
   max_displays: 2
   host_interface: usb3
   kensington_lock: false
   power_input_w: 0
+  display_resolution: Dual 4K@60Hz (2x HDMI)
+  power_button: false
+  indicator_leds: true
+  compatible_system: Windows / macOS / ChromeOS
+  supported_os: Windows 10/11, macOS, ChromeOS
+  dimensions_mm:
+    - 170
+    - 83
+    - 17
+  weight_g: 220
 reviews:
   amazon_asin: B0CF2NP8MM
   amazon_rating: 3.4

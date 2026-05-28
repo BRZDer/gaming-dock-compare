@@ -14,9 +14,15 @@ specs:
     sd_card: 0
     microsd: 0
     audio: 1
+    vga: 0
   power_delivery_w: 65
   max_displays: 3
   host_interface: usb3
   kensington_lock: false
   power_input_w: 65
+  display_resolution: Triple 4K (HDMI + 2x DP)
+  power_button: false
+  indicator_leds: false
+  compatible_system: Windows / macOS / ChromeOS
+  supported_os: Windows 10/11, macOS
 reviews: {}

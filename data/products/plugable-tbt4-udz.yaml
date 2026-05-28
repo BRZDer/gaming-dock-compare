@@ -15,11 +15,22 @@ specs:
     sd_card: 1
     microsd: 1
     audio: 1
+    vga: 0
   power_delivery_w: 100
   max_displays: 2
   host_interface: thunderbolt-4
   kensington_lock: true
   power_input_w: 96
+  display_resolution: Quad 4K@60Hz (Windows) or dual 4K@60Hz (macOS)
+  power_button: true
+  indicator_leds: true
+  compatible_system: Windows / macOS
+  supported_os: Windows 10+, macOS 11+
+  dimensions_mm:
+    - 196
+    - 104
+    - 36
+  weight_g: 646
 reviews:
   amazon_asin: B0CNTTVVN6
   pcworld_url: https://www.pcworld.com/article/2308658/plugable-thunderbolt-4-dock-tbt4-udz-review.html

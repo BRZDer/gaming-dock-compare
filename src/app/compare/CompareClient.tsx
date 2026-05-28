@@ -6,22 +6,29 @@ import { ProductWithPrices } from "@/types/product"
 import { getInterfaceLabel } from "@/lib/specs"
 
 const SPEC_ROWS: { key: string; label: string; getValue: (p: ProductWithPrices) => string | number }[] = [
-  { key: "price",     label: "Price",           getValue: (p) => p.current_price?.price_usd ?? p.msrp_usd },
-  { key: "interface", label: "Interface",        getValue: (p) => getInterfaceLabel(p.specs.host_interface) },
+  { key: "price",     label: "Price",            getValue: (p) => p.current_price?.price_usd ?? p.msrp_usd },
+  { key: "interface", label: "Upstream Interface", getValue: (p) => getInterfaceLabel(p.specs.host_interface) },
   { key: "power",     label: "Power Delivery",   getValue: (p) => `${p.specs.power_delivery_w}W` },
   { key: "displays",  label: "Max Displays",     getValue: (p) => p.specs.max_displays },
+  { key: "res",       label: "Display Resolution", getValue: (p) => p.specs.display_resolution ?? "—" },
+  { key: "hdmi",      label: "HDMI",             getValue: (p) => p.specs.ports.hdmi ?? 0 },
+  { key: "dp",        label: "DisplayPort",      getValue: (p) => p.specs.ports.displayport ?? 0 },
+  { key: "vga",       label: "VGA",              getValue: (p) => p.specs.ports.vga ?? 0 },
   { key: "tb",        label: "Thunderbolt Ports", getValue: (p) => p.specs.ports.thunderbolt ?? 0 },
   { key: "usba",      label: "USB-A Ports",      getValue: (p) => p.specs.ports.usb_a ?? 0 },
   { key: "usbc",      label: "USB-C Ports",      getValue: (p) => p.specs.ports.usb_c ?? 0 },
-  { key: "hdmi",      label: "HDMI",             getValue: (p) => p.specs.ports.hdmi ?? 0 },
-  { key: "dp",        label: "DisplayPort",      getValue: (p) => p.specs.ports.displayport ?? 0 },
-  { key: "eth",       label: "Ethernet",         getValue: (p) => p.specs.ports.ethernet ? "Yes" : "No" },
+  { key: "eth",       label: "RJ45",             getValue: (p) => p.specs.ports.ethernet ? "Yes" : "No" },
+  { key: "audio",     label: "Audio Jack",       getValue: (p) => p.specs.ports.audio ? `${p.specs.ports.audio}` : "No" },
   { key: "sd",        label: "SD Card",          getValue: (p) => p.specs.ports.sd_card ? "Yes" : "No" },
   { key: "microsd",   label: "microSD",          getValue: (p) => p.specs.ports.microsd ? "Yes" : "No" },
-  { key: "audio",     label: "Audio Jack",       getValue: (p) => p.specs.ports.audio ? `${p.specs.ports.audio}` : "No" },
   { key: "klock",     label: "Kensington Lock",  getValue: (p) => p.specs.kensington_lock ? "Yes" : "No" },
   { key: "power_in",  label: "Power Adapter",    getValue: (p) => p.specs.power_input_w ? `${p.specs.power_input_w}W` : "Bus-powered" },
+  { key: "pwrbtn",    label: "Power Button",     getValue: (p) => p.specs.power_button ? "Yes" : "No" },
+  { key: "leds",      label: "Indicator LEDs",   getValue: (p) => p.specs.indicator_leds ? "Yes" : "No" },
+  { key: "compat",    label: "Compatible System", getValue: (p) => p.specs.compatible_system ?? "—" },
+  { key: "os",        label: "Supported OS",     getValue: (p) => p.specs.supported_os ?? "—" },
   { key: "weight",    label: "Weight",           getValue: (p) => p.specs.weight_g ? `${p.specs.weight_g}g` : "—" },
+  { key: "size",      label: "Size",             getValue: (p) => p.specs.dimensions_mm ? `${p.specs.dimensions_mm[0]}×${p.specs.dimensions_mm[1]}×${p.specs.dimensions_mm[2]} mm` : "—" },
 ]
 
 // Rows where higher = better (for highlight logic)
