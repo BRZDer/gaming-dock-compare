@@ -69,7 +69,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <CompareProvider>
         <header className="border-b">
-          <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
+          <div className="page-container h-14 flex items-center justify-between">
             <a href="/" className="font-bold text-lg tracking-tight">GamingDockCompare</a>
             <div className="flex items-center gap-4">
               <CompareButton />
@@ -85,7 +85,7 @@ export default function RootLayout({
         </header>
         {children}
         <footer className="border-t mt-auto">
-          <div className="max-w-7xl mx-auto px-4 py-6 text-xs text-muted-foreground flex flex-wrap gap-4 justify-between">
+          <div className="page-container py-6 text-xs text-muted-foreground flex flex-wrap gap-4 justify-between">
             <span>© 2026 GamingDockCompare. Prices updated daily.</span>
             <span>As an Amazon Associate I earn from qualifying purchases.</span>
           </div>

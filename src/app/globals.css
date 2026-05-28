@@ -3,8 +3,16 @@
 @import "shadcn/tailwind.css";
 
 html {
-  scrollbar-gutter: stable;
   overflow-y: scroll;
+}
+
+/* Stable centering: 100vw is always the outer viewport width (constant),
+   unlike 100% which shrinks when a scrollbar appears */
+.page-container {
+  max-width: 80rem;
+  width: 100%;
+  padding-left: max(1rem, calc((100vw - 80rem) / 2));
+  padding-right: max(1rem, calc((100vw - 80rem) / 2));
 }
 
 @custom-variant dark (&:is(.dark *));
