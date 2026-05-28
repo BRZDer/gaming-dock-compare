@@ -13,10 +13,13 @@ specs:
     displayport: 1
     ethernet: 1
     sd_card: 1
-    audio: 2
+    microsd: 1
+    audio: 3
   power_delivery_w: 140
   max_displays: 3
   host_interface: thunderbolt-5
+  kensington_lock: false
+  power_input_w: 240
 reviews:
   amazon_asin: B0F2GQZXVL
   tomshardware_url: >-

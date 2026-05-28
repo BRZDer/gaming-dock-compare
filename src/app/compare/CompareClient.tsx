@@ -17,6 +17,10 @@ const SPEC_ROWS: { key: string; label: string; getValue: (p: ProductWithPrices) 
   { key: "dp",        label: "DisplayPort",      getValue: (p) => p.specs.ports.displayport ?? 0 },
   { key: "eth",       label: "Ethernet",         getValue: (p) => p.specs.ports.ethernet ? "Yes" : "No" },
   { key: "sd",        label: "SD Card",          getValue: (p) => p.specs.ports.sd_card ? "Yes" : "No" },
+  { key: "microsd",   label: "microSD",          getValue: (p) => p.specs.ports.microsd ? "Yes" : "No" },
+  { key: "audio",     label: "Audio Jack",       getValue: (p) => p.specs.ports.audio ? `${p.specs.ports.audio}` : "No" },
+  { key: "klock",     label: "Kensington Lock",  getValue: (p) => p.specs.kensington_lock ? "Yes" : "No" },
+  { key: "power_in",  label: "Power Adapter",    getValue: (p) => p.specs.power_input_w ? `${p.specs.power_input_w}W` : "Bus-powered" },
   { key: "weight",    label: "Weight",           getValue: (p) => p.specs.weight_g ? `${p.specs.weight_g}g` : "—" },
 ]
 

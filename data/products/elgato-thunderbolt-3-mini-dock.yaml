@@ -13,10 +13,13 @@ specs:
     displayport: 1
     ethernet: 1
     sd_card: 0
-    audio: 0
+    microsd: 0
+    audio: 2
   power_delivery_w: 45
   max_displays: 1
   host_interface: thunderbolt-3
+  kensington_lock: false
+  power_input_w: 0
 reviews:
   amazon_asin: B01MZ2ATGK
   amazon_rating: 4

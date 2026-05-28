@@ -47,7 +47,8 @@ export default async function ProductPage({
     { label: "DisplayPort", value: specs.ports.displayport },
     { label: "Ethernet", value: specs.ports.ethernet },
     { label: "SD Card", value: specs.ports.sd_card },
-    { label: "Audio", value: specs.ports.audio },
+    { label: "microSD", value: specs.ports.microsd },
+    { label: "Audio Jack", value: specs.ports.audio },
   ].filter((r) => r.value)
 
   return (
@@ -130,6 +131,16 @@ export default async function ProductPage({
                       <td className="px-4 py-2.5 font-medium">{row.value}</td>
                     </tr>
                   ))}
+                  <tr className="border-b bg-muted/30">
+                    <td className="px-4 py-2.5 text-muted-foreground">Power Adapter</td>
+                    <td className="px-4 py-2.5 font-medium">
+                      {specs.power_input_w ? `${specs.power_input_w}W included` : "Bus-powered"}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="px-4 py-2.5 text-muted-foreground">Kensington Lock</td>
+                    <td className="px-4 py-2.5 font-medium">{specs.kensington_lock ? "Yes" : "No"}</td>
+                  </tr>
                   {specs.weight_g && (
                     <tr>
                       <td className="px-4 py-2.5 text-muted-foreground">Weight</td>

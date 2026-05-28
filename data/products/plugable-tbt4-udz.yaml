@@ -13,10 +13,13 @@ specs:
     displayport: 1
     ethernet: 1
     sd_card: 1
+    microsd: 1
     audio: 1
   power_delivery_w: 100
   max_displays: 2
   host_interface: thunderbolt-4
+  kensington_lock: true
+  power_input_w: 96
 reviews:
   amazon_asin: B0CNTTVVN6
   pcworld_url: https://www.pcworld.com/article/2308658/plugable-thunderbolt-4-dock-tbt4-udz-review.html

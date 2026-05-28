@@ -7,11 +7,14 @@ export interface ProductSpecs {
     hdmi?: number
     ethernet?: number
     sd_card?: number
+    microsd?: number
     audio?: number
   }
   power_delivery_w: number
+  power_input_w?: number
   max_displays: number
   host_interface: "thunderbolt-5" | "thunderbolt-4" | "thunderbolt-3" | "usb4" | "usb3" | "usb-a"
+  kensington_lock?: boolean
   dimensions_mm?: [number, number, number]
   weight_g?: number
 }

@@ -12,8 +12,11 @@ specs:
     displayport: 2
     ethernet: 1
     sd_card: 0
+    microsd: 0
     audio: 1
   power_delivery_w: 65
   max_displays: 3
   host_interface: usb3
+  kensington_lock: false
+  power_input_w: 65
 reviews: {}
