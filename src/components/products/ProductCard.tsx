@@ -86,7 +86,7 @@ export function ProductCard({ product, visibleSpecs }: Props) {
     size:       specs.dimensions_mm ? `${specs.dimensions_mm[0]}×${specs.dimensions_mm[1]}×${specs.dimensions_mm[2]} mm` : "—",
   }
 
-  const visibleRows = CARD_SPEC_ROWS.filter((r) => effective.has(r.key))
+  const visibleRows = CARD_SPEC_ROWS.filter((r) => effective.has(r.key) && specValues[r.key] !== 0)
 
   return (
     <Card
