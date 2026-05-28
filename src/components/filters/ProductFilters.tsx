@@ -45,12 +45,12 @@ export function ProductFilters({ brands }: { brands: string[] }) {
       {/* Category */}
       <div className="flex flex-col gap-1 flex-1 min-w-0">
         <label className="text-xs font-medium text-muted-foreground">Interface</label>
-        <div className="flex">
+        <div className="flex gap-1">
           {CATEGORIES.map((c) => (
             <button
               key={c.value}
               onClick={() => update("category", c.value)}
-              className={`flex-1 py-1.5 text-xs border transition-colors first:rounded-l-full last:rounded-r-full border-r-0 last:border-r ${
+              className={`px-3 py-1.5 text-xs rounded-full border transition-colors whitespace-nowrap ${
                 category === c.value
                   ? "bg-primary text-primary-foreground border-primary"
                   : "border-input bg-background hover:bg-accent"
