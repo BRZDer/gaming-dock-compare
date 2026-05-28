@@ -7,7 +7,6 @@ amazon_asin: B0DTSZC5Y7
 specs:
   ports:
     usb_a: 3
-    usb_c: 3
     thunderbolt: 0
     hdmi: 2
     displayport: 1
@@ -16,6 +15,8 @@ specs:
     microsd: 1
     audio: 1
     vga: 0
+    usb_c_data: 3
+    usb_c_display: 0
   power_delivery_w: 140
   max_displays: 3
   host_interface: usb3
@@ -26,6 +27,7 @@ specs:
   indicator_leds: true
   compatible_system: Windows / macOS
   supported_os: Windows 10/11, macOS 13.5+
+  power_in: No adapter (integrated AC)
 reviews:
   amazon_asin: B0DTSZC5Y7
   amazon_rating: 4.4

@@ -6,7 +6,6 @@ msrp_usd: 179
 specs:
   ports:
     usb_a: 3
-    usb_c: 2
     thunderbolt: 0
     hdmi: 1
     displayport: 2
@@ -15,6 +14,8 @@ specs:
     microsd: 0
     audio: 1
     vga: 0
+    usb_c_data: 2
+    usb_c_display: 0
   power_delivery_w: 65
   max_displays: 3
   host_interface: usb3
@@ -25,4 +26,5 @@ specs:
   indicator_leds: false
   compatible_system: Windows / macOS / ChromeOS
   supported_os: Windows 10/11, macOS
+  power_in: USB-C PD (bus-powered)
 reviews: {}

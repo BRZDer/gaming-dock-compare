@@ -6,7 +6,6 @@ msrp_usd: 89
 specs:
   ports:
     usb_a: 2
-    usb_c: 2
     thunderbolt: 0
     hdmi: 1
     displayport: 0
@@ -15,6 +14,8 @@ specs:
     microsd: 0
     audio: 0
     vga: 0
+    usb_c_data: 2
+    usb_c_display: 0
   power_delivery_w: 100
   max_displays: 1
   host_interface: usb3
@@ -29,4 +30,5 @@ specs:
     - 131
     - 43
     - 14
+  power_in: USB-C PD (bus-powered)
 reviews: {}

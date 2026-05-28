@@ -7,7 +7,6 @@ amazon_asin: B09JL3PHBW
 specs:
   ports:
     usb_a: 5
-    usb_c: 2
     thunderbolt: 0
     hdmi: 2
     displayport: 2
@@ -16,6 +15,8 @@ specs:
     microsd: 0
     audio: 2
     vga: 0
+    usb_c_data: 2
+    usb_c_display: 0
   power_delivery_w: 100
   max_displays: 4
   host_interface: usb3
@@ -31,6 +32,7 @@ specs:
     - 89
     - 224
   weight_g: 1040
+  power_in: DC barrel jack 180W
 reviews:
   amazon_asin: B09JL3PHBW
   amazon_rating: 4.3

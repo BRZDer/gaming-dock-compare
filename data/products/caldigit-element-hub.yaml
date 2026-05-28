@@ -7,13 +7,14 @@ amazon_asin: B0B2KXR67J
 specs:
   ports:
     usb_a: 4
-    usb_c: 1
     thunderbolt: 4
     ethernet: 0
     sd_card: 0
     microsd: 0
     audio: 0
     vga: 0
+    usb_c_data: 1
+    usb_c_display: 0
   power_delivery_w: 18
   max_displays: 2
   host_interface: thunderbolt-3
@@ -29,6 +30,7 @@ specs:
     - 70
     - 18
   weight_g: 180
+  power_in: DC barrel jack 150W
 reviews:
   amazon_asin: B0B2KXR67J
   amazon_rating: 4.6

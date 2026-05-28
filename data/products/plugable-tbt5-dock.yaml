@@ -7,7 +7,6 @@ amazon_asin: B0F96ZVSKM
 specs:
   ports:
     usb_a: 4
-    usb_c: 2
     thunderbolt: 2
     hdmi: 1
     displayport: 1
@@ -16,6 +15,8 @@ specs:
     microsd: 1
     audio: 2
     vga: 0
+    usb_c_data: 2
+    usb_c_display: 0
   power_delivery_w: 140
   max_displays: 3
   host_interface: thunderbolt-5
@@ -31,6 +32,7 @@ specs:
     - 78
     - 42
   weight_g: 692
+  power_in: DC barrel jack 180W
 reviews:
   amazon_asin: B0F96ZVSKM
   amazon_rating: 4.3

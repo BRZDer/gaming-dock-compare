@@ -7,7 +7,6 @@ amazon_asin: B01MZ2ATGK
 specs:
   ports:
     usb_a: 2
-    usb_c: 0
     thunderbolt: 1
     hdmi: 0
     displayport: 1
@@ -16,6 +15,8 @@ specs:
     microsd: 0
     audio: 2
     vga: 0
+    usb_c_data: 0
+    usb_c_display: 0
   power_delivery_w: 45
   max_displays: 1
   host_interface: thunderbolt-3
@@ -26,6 +27,7 @@ specs:
   indicator_leds: false
   compatible_system: Windows / macOS
   supported_os: Windows 10+, macOS 10.12+
+  power_in: No adapter (bus-powered via TB3 cable)
 reviews:
   amazon_asin: B01MZ2ATGK
   amazon_rating: 4

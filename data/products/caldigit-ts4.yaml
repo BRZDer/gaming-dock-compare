@@ -7,7 +7,6 @@ amazon_asin: B09GK8LBWS
 specs:
   ports:
     usb_a: 5
-    usb_c: 3
     thunderbolt: 2
     displayport: 1
     ethernet: 1
@@ -15,6 +14,8 @@ specs:
     microsd: 1
     audio: 3
     vga: 0
+    usb_c_data: 3
+    usb_c_display: 0
   power_delivery_w: 98
   max_displays: 2
   host_interface: thunderbolt-4
@@ -30,6 +31,7 @@ specs:
   indicator_leds: true
   compatible_system: Windows / macOS / ChromeOS
   supported_os: Windows 10 (20H2)+, macOS 11.4+
+  power_in: DC barrel jack 230W
 reviews:
   amazon_asin: B09GK8LBWS
   wirecutter_pick: true

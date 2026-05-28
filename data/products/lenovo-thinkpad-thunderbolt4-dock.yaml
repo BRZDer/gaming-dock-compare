@@ -7,7 +7,6 @@ amazon_asin: B09GJJ5C32
 specs:
   ports:
     usb_a: 4
-    usb_c: 2
     thunderbolt: 2
     hdmi: 1
     displayport: 2
@@ -16,6 +15,8 @@ specs:
     microsd: 0
     audio: 2
     vga: 0
+    usb_c_data: 2
+    usb_c_display: 0
   power_delivery_w: 135
   max_displays: 4
   host_interface: thunderbolt-4
@@ -31,6 +32,7 @@ specs:
     - 76
     - 25
   weight_g: 526
+  power_in: DC barrel jack 135W (Lenovo Slim Tip)
 reviews:
   amazon_asin: B09GJJ5C32
   amazon_rating: 4.3

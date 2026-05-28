@@ -7,7 +7,6 @@ amazon_asin: B0B13Y2QVW
 specs:
   ports:
     usb_a: 4
-    usb_c: 1
     thunderbolt: 2
     hdmi: 1
     displayport: 1
@@ -16,6 +15,8 @@ specs:
     microsd: 0
     audio: 1
     vga: 0
+    usb_c_data: 1
+    usb_c_display: 1
   power_delivery_w: 130
   max_displays: 4
   host_interface: thunderbolt-4
@@ -31,6 +32,7 @@ specs:
     - 90
     - 29
   weight_g: 650
+  power_in: DC barrel jack 180W (Dell 7.4mm)
 reviews:
   amazon_asin: B0B13Y2QVW
   amazon_rating: 4.4

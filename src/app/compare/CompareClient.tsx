@@ -16,13 +16,15 @@ const SPEC_ROWS: { key: string; label: string; getValue: (p: ProductWithPrices) 
   { key: "vga",       label: "VGA",              getValue: (p) => p.specs.ports.vga ?? 0 },
   { key: "tb",        label: "Thunderbolt Ports", getValue: (p) => p.specs.ports.thunderbolt ?? 0 },
   { key: "usba",      label: "USB-A Ports",      getValue: (p) => p.specs.ports.usb_a ?? 0 },
-  { key: "usbc",      label: "USB-C Ports",      getValue: (p) => p.specs.ports.usb_c ?? 0 },
+  { key: "usbc_disp", label: "USB-C (Display)",  getValue: (p) => p.specs.ports.usb_c_display ?? 0 },
+  { key: "usbc_data", label: "USB-C (Data)",     getValue: (p) => p.specs.ports.usb_c_data ?? 0 },
   { key: "eth",       label: "RJ45",             getValue: (p) => p.specs.ports.ethernet ? "Yes" : "No" },
   { key: "audio",     label: "Audio Jack",       getValue: (p) => p.specs.ports.audio ? `${p.specs.ports.audio}` : "No" },
   { key: "sd",        label: "SD Card",          getValue: (p) => p.specs.ports.sd_card ? "Yes" : "No" },
   { key: "microsd",   label: "microSD",          getValue: (p) => p.specs.ports.microsd ? "Yes" : "No" },
   { key: "klock",     label: "Kensington Lock",  getValue: (p) => p.specs.kensington_lock ? "Yes" : "No" },
-  { key: "power_in",  label: "Power Adapter",    getValue: (p) => p.specs.power_input_w ? `${p.specs.power_input_w}W` : "Bus-powered" },
+  { key: "power_in",  label: "Power In",         getValue: (p) => p.specs.power_in ?? "—" },
+  { key: "adapter",   label: "Power Adapter",    getValue: (p) => p.specs.power_input_w ? `${p.specs.power_input_w}W` : "Bus-powered" },
   { key: "pwrbtn",    label: "Power Button",     getValue: (p) => p.specs.power_button ? "Yes" : "No" },
   { key: "leds",      label: "Indicator LEDs",   getValue: (p) => p.specs.indicator_leds ? "Yes" : "No" },
   { key: "compat",    label: "Compatible System", getValue: (p) => p.specs.compatible_system ?? "—" },
@@ -32,7 +34,7 @@ const SPEC_ROWS: { key: string; label: string; getValue: (p: ProductWithPrices) 
 ]
 
 // Rows where higher = better (for highlight logic)
-const HIGHER_IS_BETTER = new Set(["power", "displays", "tb", "usba", "usbc", "hdmi", "dp"])
+const HIGHER_IS_BETTER = new Set(["power", "displays", "tb", "usba", "usbc_disp", "usbc_data", "hdmi", "dp"])
 // Rows where lower = better
 const LOWER_IS_BETTER = new Set(["price"])
 

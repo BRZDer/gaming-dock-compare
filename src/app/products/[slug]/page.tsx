@@ -42,7 +42,8 @@ export default async function ProductPage({
   const portRows = [
     { label: "Thunderbolt", value: specs.ports.thunderbolt },
     { label: "USB-A", value: specs.ports.usb_a },
-    { label: "USB-C", value: specs.ports.usb_c },
+    { label: "USB-C (Display)", value: specs.ports.usb_c_display },
+    { label: "USB-C (Data)", value: specs.ports.usb_c_data },
     { label: "HDMI", value: specs.ports.hdmi },
     { label: "DisplayPort", value: specs.ports.displayport },
     { label: "VGA", value: specs.ports.vga },
@@ -132,7 +133,13 @@ export default async function ProductPage({
                       <td className="px-4 py-2.5 font-medium">{row.value}</td>
                     </tr>
                   ))}
-                  <tr className="border-b bg-muted/30">
+                  {specs.power_in && (
+                    <tr className="border-b bg-muted/30">
+                      <td className="px-4 py-2.5 text-muted-foreground">Power In</td>
+                      <td className="px-4 py-2.5 font-medium">{specs.power_in}</td>
+                    </tr>
+                  )}
+                  <tr className="border-b">
                     <td className="px-4 py-2.5 text-muted-foreground">Power Adapter</td>
                     <td className="px-4 py-2.5 font-medium">
                       {specs.power_input_w ? `${specs.power_input_w}W included` : "Bus-powered"}

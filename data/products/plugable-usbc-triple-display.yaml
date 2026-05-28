@@ -7,7 +7,6 @@ amazon_asin: B0779K9DG2
 specs:
   ports:
     usb_a: 4
-    usb_c: 1
     thunderbolt: 0
     hdmi: 2
     displayport: 1
@@ -16,6 +15,8 @@ specs:
     microsd: 0
     audio: 2
     vga: 0
+    usb_c_data: 1
+    usb_c_display: 0
   power_delivery_w: 96
   max_displays: 3
   host_interface: usb3
@@ -26,6 +27,7 @@ specs:
   indicator_leds: true
   compatible_system: Windows / macOS / ChromeOS
   supported_os: Windows 10/11, macOS 10.15.5+, ChromeOS 100+
+  power_in: DC barrel jack 100W
 reviews:
   amazon_asin: B0779K9DG2
   amazon_rating: 4.2

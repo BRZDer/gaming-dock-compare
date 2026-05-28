@@ -7,7 +7,6 @@ amazon_asin: B0F2GQZXVL
 specs:
   ports:
     usb_a: 5
-    usb_c: 3
     thunderbolt: 2
     hdmi: 1
     displayport: 1
@@ -16,6 +15,8 @@ specs:
     microsd: 1
     audio: 3
     vga: 0
+    usb_c_data: 3
+    usb_c_display: 0
   power_delivery_w: 140
   max_displays: 3
   host_interface: thunderbolt-5
@@ -31,6 +32,7 @@ specs:
     - 47
     - 128
   weight_g: 900
+  power_in: DC barrel jack 330W
 reviews:
   amazon_asin: B0F2GQZXVL
   tomshardware_url: >-

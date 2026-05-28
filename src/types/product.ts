@@ -1,7 +1,8 @@
 export interface ProductSpecs {
   ports: {
     usb_a?: number
-    usb_c?: number
+    usb_c_data?: number
+    usb_c_display?: number
     thunderbolt?: number
     displayport?: number
     hdmi?: number
@@ -13,6 +14,7 @@ export interface ProductSpecs {
   }
   power_delivery_w: number
   power_input_w?: number
+  power_in?: string
   max_displays: number
   display_resolution?: string
   host_interface: "thunderbolt-5" | "thunderbolt-4" | "thunderbolt-3" | "usb4" | "usb3" | "usb-a"

@@ -17,7 +17,8 @@ export function ProductCard({ product }: Props) {
 
   const totalPorts =
     (specs.ports.usb_a ?? 0) +
-    (specs.ports.usb_c ?? 0) +
+    (specs.ports.usb_c_data ?? 0) +
+    (specs.ports.usb_c_display ?? 0) +
     (specs.ports.thunderbolt ?? 0) +
     (specs.ports.hdmi ?? 0) +
     (specs.ports.displayport ?? 0)

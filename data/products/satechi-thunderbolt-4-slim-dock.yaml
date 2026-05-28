@@ -7,7 +7,6 @@ amazon_asin: B0CRZXQ9D3
 specs:
   ports:
     usb_a: 3
-    usb_c: 1
     thunderbolt: 3
     hdmi: 0
     displayport: 0
@@ -16,6 +15,8 @@ specs:
     microsd: 0
     audio: 0
     vga: 0
+    usb_c_data: 1
+    usb_c_display: 0
   power_delivery_w: 60
   max_displays: 2
   host_interface: thunderbolt-4
@@ -31,6 +32,7 @@ specs:
     - 74
     - 18
   weight_g: 241
+  power_in: DC barrel jack 150W
 reviews:
   amazon_asin: B0CRZXQ9D3
   amazon_rating: 4.3
