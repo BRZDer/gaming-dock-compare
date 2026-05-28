@@ -101,7 +101,7 @@ export function CompareClient({ products }: Props) {
   const visibleRows = SPEC_ROWS.filter((r) => visibleKeys.has(r.key))
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-10">
+    <main className="page-container py-10">
       <div className="mb-6">
         <h1 className="text-3xl font-bold tracking-tight">Compare Docking Stations</h1>
         <p className="text-muted-foreground mt-1">Select products to compare side by side.</p>
