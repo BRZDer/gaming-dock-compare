@@ -10,6 +10,24 @@ interface Props {
   visibleSpecs?: Set<string>
 }
 
+// Maps spec sidebar keys to a function that returns whether a product "has" that spec
+const SPEC_FILTER: Record<string, (p: ProductWithPrices) => boolean> = {
+  hdmi:       (p) => (p.specs.ports.hdmi ?? 0) > 0,
+  dp:         (p) => (p.specs.ports.displayport ?? 0) > 0,
+  vga:        (p) => (p.specs.ports.vga ?? 0) > 0,
+  tb:         (p) => (p.specs.ports.thunderbolt ?? 0) > 0,
+  usbc_disp:  (p) => (p.specs.ports.usb_c_display ?? 0) > 0,
+  usba:       (p) => (p.specs.ports.usb_a ?? 0) > 0,
+  usbc_data:  (p) => (p.specs.ports.usb_c_data ?? 0) > 0,
+  sd:         (p) => (p.specs.ports.sd_card ?? 0) > 0,
+  microsd:    (p) => (p.specs.ports.microsd ?? 0) > 0,
+  audio:      (p) => (p.specs.ports.audio ?? 0) > 0,
+  eth:        (p) => !!p.specs.ports.ethernet,
+  klock:      (p) => !!p.specs.kensington_lock,
+  pwrbtn:     (p) => !!p.specs.power_button,
+  leds:       (p) => !!p.specs.indicator_leds,
+}
+
 export function ProductGrid({ products, visibleSpecs }: Props) {
   const params = useSearchParams()
 
@@ -24,6 +42,13 @@ export function ProductGrid({ products, visibleSpecs }: Props) {
       if (brand && p.brand !== brand) return false
       const price = p.current_price?.price_usd ?? p.msrp_usd
       if (maxPrice && price > maxPrice) return false
+      // Left sidebar spec filter — intersection with top filters
+      if (visibleSpecs) {
+        for (const key of visibleSpecs) {
+          const check = SPEC_FILTER[key]
+          if (check && !check(p)) return false
+        }
+      }
       return true
     })
 
@@ -45,7 +70,7 @@ export function ProductGrid({ products, visibleSpecs }: Props) {
     })
 
     return result
-  }, [products, params])
+  }, [products, params, visibleSpecs])
 
   if (filtered.length === 0) {
     return (
