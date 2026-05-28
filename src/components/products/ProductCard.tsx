@@ -68,7 +68,7 @@ export function ProductCard({ product, visibleSpecs }: Props) {
     usba:       specs.ports.usb_a ?? 0,
     usbc_data:  (() => {
       const count = specs.ports.usb_c_data ?? 0
-      if (count >= 2 && specs.ports.usb_c_data_detail) return `${count} (${specs.ports.usb_c_data_detail})`
+      if (specs.ports.usb_c_data_detail) return `${count} (${specs.ports.usb_c_data_detail})`
       return count
     })(),
     eth:        specs.ports.ethernet ? "Yes" : "No",

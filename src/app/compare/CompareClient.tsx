@@ -19,7 +19,7 @@ const SPEC_ROWS: { key: string; label: string; getValue: (p: ProductWithPrices) 
   { key: "usba",      label: "USB-A",             getValue: (p) => p.specs.ports.usb_a ?? 0 },
   { key: "usbc_data", label: "USB-C (Data)",      getValue: (p) => {
     const count = p.specs.ports.usb_c_data ?? 0
-    if (count >= 2 && p.specs.ports.usb_c_data_detail) return `${count} (${p.specs.ports.usb_c_data_detail})`
+    if (p.specs.ports.usb_c_data_detail) return `${count} (${p.specs.ports.usb_c_data_detail})`
     return count
   }},
   { key: "eth",       label: "RJ45",              getValue: (p) => p.specs.ports.ethernet ? "Yes" : "No" },

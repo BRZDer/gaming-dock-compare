@@ -56,7 +56,7 @@ export default async function ProductPage({
     { label: "USB-A",              value: specs.ports.usb_a ?? 0 },
     { label: "USB-C (Data)",       value: (() => {
       const count = specs.ports.usb_c_data ?? 0
-      if (count >= 2 && specs.ports.usb_c_data_detail) return `${count} (${specs.ports.usb_c_data_detail})`
+      if (specs.ports.usb_c_data_detail) return `${count} (${specs.ports.usb_c_data_detail})`
       return count
     })() },
     { label: "RJ45",               value: specs.ports.ethernet ? "Yes" : "No" },
