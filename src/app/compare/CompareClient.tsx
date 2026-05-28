@@ -13,8 +13,7 @@ const SPEC_ROWS: { key: string; label: string; getValue: (p: ProductWithPrices) 
   { key: "res",       label: "Display Resolution", getValue: (p) => p.specs.display_resolution ?? "—" },
   { key: "hdmi",      label: "HDMI",              getValue: (p) => p.specs.ports.hdmi ?? 0 },
   { key: "dp",        label: "DisplayPort",       getValue: (p) => p.specs.ports.displayport ?? 0 },
-  { key: "vga",       label: "VGA",               getValue: (p) => p.specs.ports.vga ?? 0 },
-  { key: "tb",        label: "Thunderbolt",        getValue: (p) => p.specs.ports.thunderbolt ?? 0 },
+{ key: "tb",        label: "Thunderbolt",        getValue: (p) => p.specs.ports.thunderbolt ?? 0 },
   { key: "usbc_disp", label: "USB-C (Display)",   getValue: (p) => p.specs.ports.usb_c_display ?? 0 },
   { key: "usba",      label: "USB-A",             getValue: (p) => p.specs.ports.usb_a ?? 0 },
   { key: "usbc_data", label: "USB-C (Data)",      getValue: (p) => {

@@ -14,8 +14,7 @@ interface Props {
 const SPEC_FILTER: Record<string, (p: ProductWithPrices) => boolean> = {
   hdmi:       (p) => (p.specs.ports.hdmi ?? 0) > 0,
   dp:         (p) => (p.specs.ports.displayport ?? 0) > 0,
-  vga:        (p) => (p.specs.ports.vga ?? 0) > 0,
-  tb:         (p) => (p.specs.ports.thunderbolt ?? 0) > 0,
+tb:         (p) => (p.specs.ports.thunderbolt ?? 0) > 0,
   usbc_disp:  (p) => (p.specs.ports.usb_c_display ?? 0) > 0,
   usba:       (p) => (p.specs.ports.usb_a ?? 0) > 0,
   usbc_data:  (p) => (p.specs.ports.usb_c_data ?? 0) > 0,
