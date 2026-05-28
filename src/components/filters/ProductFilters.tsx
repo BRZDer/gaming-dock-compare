@@ -41,18 +41,18 @@ export function ProductFilters({ brands }: { brands: string[] }) {
   const maxPrice = params.get("maxPrice") ?? ""
 
   return (
-    <div className="flex gap-3 items-end mb-6 flex-wrap">
+    <div className="flex gap-3 items-end mb-6">
       {/* Category */}
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 flex-1 min-w-0">
         <label className="text-xs font-medium text-muted-foreground">Interface</label>
-        <div className="flex gap-1">
+        <div className="flex">
           {CATEGORIES.map((c) => (
             <button
               key={c.value}
               onClick={() => update("category", c.value)}
-              className={`px-3 py-1.5 text-xs rounded-full border transition-colors whitespace-nowrap ${
+              className={`flex-1 py-1.5 text-xs border transition-colors whitespace-nowrap first:rounded-l-full last:rounded-r-full -mr-px last:mr-0 ${
                 category === c.value
-                  ? "bg-primary text-primary-foreground border-primary"
+                  ? "bg-primary text-primary-foreground border-primary relative z-10"
                   : "border-input bg-background hover:bg-accent"
               }`}
             >
