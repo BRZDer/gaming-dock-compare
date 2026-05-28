@@ -39,19 +39,33 @@ export default async function ProductPage({
   const { name, brand, category, specs, reviews, current_price, price_history, msrp_usd } = product
   const price = current_price?.price_usd ?? msrp_usd
 
-  const portRows = [
-    { label: "Thunderbolt", value: specs.ports.thunderbolt },
-    { label: "USB-A", value: specs.ports.usb_a },
-    { label: "USB-C (Display)", value: specs.ports.usb_c_display },
-    { label: "USB-C (Data)", value: specs.ports.usb_c_data },
-    { label: "HDMI", value: specs.ports.hdmi },
-    { label: "DisplayPort", value: specs.ports.displayport },
-    { label: "VGA", value: specs.ports.vga },
-    { label: "Ethernet", value: specs.ports.ethernet },
-    { label: "SD Card", value: specs.ports.sd_card },
-    { label: "microSD", value: specs.ports.microsd },
-    { label: "Audio Jack", value: specs.ports.audio },
-  ].filter((r) => r.value)
+  const specRows: { label: string; value: string | number }[] = [
+    { label: "Size",               value: specs.dimensions_mm ? `${specs.dimensions_mm[0]} × ${specs.dimensions_mm[1]} × ${specs.dimensions_mm[2]} mm` : "—" },
+    { label: "Weight",             value: specs.weight_g ? `${specs.weight_g}g` : "—" },
+    { label: "Power Adapter",      value: specs.power_input_w ? `${specs.power_input_w}W included` : "Bus-powered" },
+    { label: "Upstream Interface", value: getInterfaceLabel(specs.host_interface) },
+    { label: "Transfer Speed",     value: getBandwidth(specs) },
+    { label: "HDMI",               value: specs.ports.hdmi ?? 0 },
+    { label: "DisplayPort",        value: specs.ports.displayport ?? 0 },
+    { label: "VGA",                value: specs.ports.vga ?? 0 },
+    { label: "USB-C (Display)",    value: specs.ports.usb_c_display ?? 0 },
+    { label: "Thunderbolt",        value: specs.ports.thunderbolt ?? 0 },
+    { label: "Display Resolution", value: specs.display_resolution ?? "—" },
+    { label: "Max Displays",       value: `${specs.max_displays} (${getMaxResolution(specs)})` },
+    { label: "Power Delivery",     value: `${specs.power_delivery_w}W` },
+    { label: "USB-A",              value: specs.ports.usb_a ?? 0 },
+    { label: "USB-C (Data)",       value: specs.ports.usb_c_data ?? 0 },
+    { label: "RJ45",               value: specs.ports.ethernet ? "Yes" : "No" },
+    { label: "Audio Jack",         value: specs.ports.audio ? `${specs.ports.audio}` : "No" },
+    { label: "SD Card",            value: specs.ports.sd_card ? "Yes" : "No" },
+    { label: "microSD",            value: specs.ports.microsd ? "Yes" : "No" },
+    { label: "Kensington Lock",    value: specs.kensington_lock ? "Yes" : "No" },
+    { label: "Power In",           value: specs.power_in ?? "—" },
+    { label: "Power Button",       value: specs.power_button ? "Yes" : "No" },
+    { label: "Indicator LEDs",     value: specs.indicator_leds ? "Yes" : "No" },
+    { label: "Compatible System",  value: specs.compatible_system ?? "—" },
+    { label: "Supported OS",       value: specs.supported_os ?? "—" },
+  ]
 
   return (
     <main className="max-w-4xl mx-auto px-4 py-10">
@@ -107,92 +121,12 @@ export default async function ProductPage({
             <div className="rounded-lg border overflow-hidden">
               <table className="w-full text-sm">
                 <tbody>
-                  <tr className="border-b">
-                    <td className="px-4 py-2.5 text-muted-foreground w-1/2">Host Interface</td>
-                    <td className="px-4 py-2.5 font-medium">
-                      {getInterfaceLabel(specs.host_interface)}
-                    </td>
-                  </tr>
-                  <tr className="border-b bg-muted/30">
-                    <td className="px-4 py-2.5 text-muted-foreground">Transfer Speed</td>
-                    <td className="px-4 py-2.5 font-medium">{getBandwidth(specs)}</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="px-4 py-2.5 text-muted-foreground">Power Delivery</td>
-                    <td className="px-4 py-2.5 font-medium">{specs.power_delivery_w}W</td>
-                  </tr>
-                  <tr className="border-b bg-muted/30">
-                    <td className="px-4 py-2.5 text-muted-foreground">Max Displays</td>
-                    <td className="px-4 py-2.5 font-medium">
-                      {specs.max_displays} ({getMaxResolution(specs)})
-                    </td>
-                  </tr>
-                  {portRows.map((row, i) => (
-                    <tr key={row.label} className={i % 2 === 0 ? "bg-muted/30 border-b" : "border-b"}>
-                      <td className="px-4 py-2.5 text-muted-foreground">{row.label}</td>
+                  {specRows.map((row, i) => (
+                    <tr key={row.label} className={i % 2 === 0 ? "border-b" : "border-b bg-muted/30"}>
+                      <td className="px-4 py-2.5 text-muted-foreground w-1/2">{row.label}</td>
                       <td className="px-4 py-2.5 font-medium">{row.value}</td>
                     </tr>
                   ))}
-                  {specs.power_in && (
-                    <tr className="border-b bg-muted/30">
-                      <td className="px-4 py-2.5 text-muted-foreground">Power In</td>
-                      <td className="px-4 py-2.5 font-medium">{specs.power_in}</td>
-                    </tr>
-                  )}
-                  <tr className="border-b">
-                    <td className="px-4 py-2.5 text-muted-foreground">Power Adapter</td>
-                    <td className="px-4 py-2.5 font-medium">
-                      {specs.power_input_w ? `${specs.power_input_w}W included` : "Bus-powered"}
-                    </td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="px-4 py-2.5 text-muted-foreground">Kensington Lock</td>
-                    <td className="px-4 py-2.5 font-medium">{specs.kensington_lock ? "Yes" : "No"}</td>
-                  </tr>
-                  {specs.display_resolution && (
-                    <tr className="border-b bg-muted/30">
-                      <td className="px-4 py-2.5 text-muted-foreground">Display Resolution</td>
-                      <td className="px-4 py-2.5 font-medium">{specs.display_resolution}</td>
-                    </tr>
-                  )}
-                  {specs.ports.vga ? (
-                    <tr className="border-b">
-                      <td className="px-4 py-2.5 text-muted-foreground">VGA</td>
-                      <td className="px-4 py-2.5 font-medium">{specs.ports.vga}</td>
-                    </tr>
-                  ) : null}
-                  <tr className="border-b bg-muted/30">
-                    <td className="px-4 py-2.5 text-muted-foreground">Power Button</td>
-                    <td className="px-4 py-2.5 font-medium">{specs.power_button ? "Yes" : "No"}</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="px-4 py-2.5 text-muted-foreground">Indicator LEDs</td>
-                    <td className="px-4 py-2.5 font-medium">{specs.indicator_leds ? "Yes" : "No"}</td>
-                  </tr>
-                  {specs.compatible_system && (
-                    <tr className="border-b bg-muted/30">
-                      <td className="px-4 py-2.5 text-muted-foreground">Compatible System</td>
-                      <td className="px-4 py-2.5 font-medium">{specs.compatible_system}</td>
-                    </tr>
-                  )}
-                  {specs.supported_os && (
-                    <tr className="border-b">
-                      <td className="px-4 py-2.5 text-muted-foreground">Supported OS</td>
-                      <td className="px-4 py-2.5 font-medium">{specs.supported_os}</td>
-                    </tr>
-                  )}
-                  {specs.weight_g && (
-                    <tr className="border-b bg-muted/30">
-                      <td className="px-4 py-2.5 text-muted-foreground">Weight</td>
-                      <td className="px-4 py-2.5 font-medium">{specs.weight_g}g</td>
-                    </tr>
-                  )}
-                  {specs.dimensions_mm && (
-                    <tr>
-                      <td className="px-4 py-2.5 text-muted-foreground">Size</td>
-                      <td className="px-4 py-2.5 font-medium">{specs.dimensions_mm[0]} × {specs.dimensions_mm[1]} × {specs.dimensions_mm[2]} mm</td>
-                    </tr>
-                  )}
                 </tbody>
               </table>
             </div>
