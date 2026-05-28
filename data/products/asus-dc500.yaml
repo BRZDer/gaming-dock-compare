@@ -7,7 +7,7 @@ amazon_asin: B0DHYKHCRJ
 specs:
   ports:
     usb_a: 4
-    thunderbolt: 0
+    thunderbolt: 1
     hdmi: 2
     displayport: 0
     ethernet: 1
@@ -15,9 +15,8 @@ specs:
     microsd: 1
     audio: 1
     vga: 0
-    usb_c_data: 1
+    usb_c_data: 0
     usb_c_display: 0
-    usb_c_data_detail: TB4 (40Gbps)
   power_delivery_w: 96
   max_displays: 3
   host_interface: thunderbolt-4
