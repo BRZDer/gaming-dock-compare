@@ -118,7 +118,6 @@ export function ProductCard({ product, visibleSpecs }: Props) {
             {getInterfaceLabel(category)}
           </Badge>
         </div>
-        <p className="text-sm text-muted-foreground">{brand}</p>
       </CardHeader>
       <CardContent className="flex flex-col gap-3 flex-1">
         <div className="text-2xl font-bold">
