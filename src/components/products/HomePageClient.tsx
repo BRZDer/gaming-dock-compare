@@ -84,7 +84,7 @@ export function HomePageClient({ products, brands }: Props) {
 
       {/* Main content */}
       <div className="min-w-0">
-        <Suspense>
+        <Suspense fallback={<div className="min-h-[800px]" />}>
           <ProductFilters brands={brands} />
           <p className="text-sm text-muted-foreground mb-4">{products.length} products</p>
           <ProductGrid products={products} visibleSpecs={visibleSpecs} />

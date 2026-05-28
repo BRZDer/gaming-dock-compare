@@ -2,8 +2,10 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-html {
+html,
+body {
   scrollbar-gutter: stable;
+  overflow-y: scroll;
 }
 
 @custom-variant dark (&:is(.dark *));
