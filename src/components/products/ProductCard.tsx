@@ -66,7 +66,11 @@ export function ProductCard({ product, visibleSpecs }: Props) {
     tb:         specs.ports.thunderbolt ?? 0,
     usbc_disp:  specs.ports.usb_c_display ?? 0,
     usba:       specs.ports.usb_a ?? 0,
-    usbc_data:  specs.ports.usb_c_data ?? 0,
+    usbc_data:  (() => {
+      const count = specs.ports.usb_c_data ?? 0
+      if (count >= 2 && specs.ports.usb_c_data_detail) return `${count} (${specs.ports.usb_c_data_detail})`
+      return count
+    })(),
     eth:        specs.ports.ethernet ? "Yes" : "No",
     audio:      specs.ports.audio ? `${specs.ports.audio}` : "No",
     sd:         specs.ports.sd_card ? "Yes" : "No",

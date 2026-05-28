@@ -54,7 +54,11 @@ export default async function ProductPage({
     { label: "Max Displays",       value: `${specs.max_displays} (${getMaxResolution(specs)})` },
     { label: "Power Delivery",     value: `${specs.power_delivery_w}W` },
     { label: "USB-A",              value: specs.ports.usb_a ?? 0 },
-    { label: "USB-C (Data)",       value: specs.ports.usb_c_data ?? 0 },
+    { label: "USB-C (Data)",       value: (() => {
+      const count = specs.ports.usb_c_data ?? 0
+      if (count >= 2 && specs.ports.usb_c_data_detail) return `${count} (${specs.ports.usb_c_data_detail})`
+      return count
+    })() },
     { label: "RJ45",               value: specs.ports.ethernet ? "Yes" : "No" },
     { label: "Audio Jack",         value: specs.ports.audio ? `${specs.ports.audio}` : "No" },
     { label: "SD Card",            value: specs.ports.sd_card ? "Yes" : "No" },

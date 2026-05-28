@@ -2,6 +2,7 @@ export interface ProductSpecs {
   ports: {
     usb_a?: number
     usb_c_data?: number
+    usb_c_data_detail?: string
     usb_c_display?: number
     thunderbolt?: number
     displayport?: number

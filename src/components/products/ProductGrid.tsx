@@ -35,8 +35,8 @@ export function ProductGrid({ products, visibleSpecs }: Props) {
         case "price-desc":  return priceB - priceA
         case "power-desc":  return b.specs.power_delivery_w - a.specs.power_delivery_w
         case "ports-desc": {
-          const totalA = Object.values(a.specs.ports).reduce((s, v) => s + (v ?? 0), 0)
-          const totalB = Object.values(b.specs.ports).reduce((s, v) => s + (v ?? 0), 0)
+          const totalA = Object.values(a.specs.ports).reduce<number>((s, v) => s + (typeof v === "number" ? v : 0), 0)
+          const totalB = Object.values(b.specs.ports).reduce<number>((s, v) => s + (typeof v === "number" ? v : 0), 0)
           return totalB - totalA
         }
         case "displays-desc": return b.specs.max_displays - a.specs.max_displays

@@ -17,7 +17,11 @@ const SPEC_ROWS: { key: string; label: string; getValue: (p: ProductWithPrices) 
   { key: "tb",        label: "Thunderbolt",        getValue: (p) => p.specs.ports.thunderbolt ?? 0 },
   { key: "usbc_disp", label: "USB-C (Display)",   getValue: (p) => p.specs.ports.usb_c_display ?? 0 },
   { key: "usba",      label: "USB-A",             getValue: (p) => p.specs.ports.usb_a ?? 0 },
-  { key: "usbc_data", label: "USB-C (Data)",      getValue: (p) => p.specs.ports.usb_c_data ?? 0 },
+  { key: "usbc_data", label: "USB-C (Data)",      getValue: (p) => {
+    const count = p.specs.ports.usb_c_data ?? 0
+    if (count >= 2 && p.specs.ports.usb_c_data_detail) return `${count} (${p.specs.ports.usb_c_data_detail})`
+    return count
+  }},
   { key: "eth",       label: "RJ45",              getValue: (p) => p.specs.ports.ethernet ? "Yes" : "No" },
   { key: "audio",     label: "Audio Jack",        getValue: (p) => p.specs.ports.audio ? `${p.specs.ports.audio}` : "No" },
   { key: "sd",        label: "SD Card",           getValue: (p) => p.specs.ports.sd_card ? "Yes" : "No" },
