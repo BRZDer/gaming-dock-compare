@@ -5,8 +5,6 @@ import { useCallback, useMemo } from "react"
 import { ProductWithPrices } from "@/types/product"
 import { getInterfaceLabel } from "@/lib/specs"
 
-const MAX_COMPARE = 4
-
 const SPEC_ROWS: { key: string; label: string; getValue: (p: ProductWithPrices) => string | number }[] = [
   { key: "price",     label: "Price",           getValue: (p) => p.current_price?.price_usd ?? p.msrp_usd },
   { key: "interface", label: "Interface",        getValue: (p) => getInterfaceLabel(p.specs.host_interface) },
@@ -45,7 +43,7 @@ export function CompareClient({ products }: Props) {
   const params = useSearchParams()
 
   const selectedSlugs = useMemo(
-    () => (params.get("products") ?? "").split(",").filter(Boolean).slice(0, MAX_COMPARE),
+    () => (params.get("products") ?? "").split(",").filter(Boolean),
     [params]
   )
 
@@ -65,7 +63,7 @@ export function CompareClient({ products }: Props) {
   )
 
   const addProduct = (slug: string) => {
-    if (selectedSlugs.includes(slug) || selectedSlugs.length >= MAX_COMPARE) return
+    if (selectedSlugs.includes(slug)) return
     updateSelected([...selectedSlugs, slug])
   }
 
@@ -77,7 +75,7 @@ export function CompareClient({ products }: Props) {
     <main className="max-w-7xl mx-auto px-4 py-10">
       <div className="mb-6">
         <h1 className="text-3xl font-bold tracking-tight">Compare Docking Stations</h1>
-        <p className="text-muted-foreground mt-1">Select up to 4 products to compare side by side.</p>
+        <p className="text-muted-foreground mt-1">Select products to compare side by side.</p>
       </div>
 
       {/* Product selector */}
@@ -97,7 +95,7 @@ export function CompareClient({ products }: Props) {
             </button>
           </span>
         ))}
-        {selected.length < MAX_COMPARE && (
+        {available.length > 0 && (
           <select
             value=""
             onChange={(e) => { if (e.target.value) addProduct(e.target.value) }}

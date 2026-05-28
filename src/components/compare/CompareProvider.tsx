@@ -19,9 +19,7 @@ export function CompareProvider({ children }: { children: React.ReactNode }) {
 
   const toggle = useCallback((slug: string) => {
     setSelected((prev) =>
-      prev.includes(slug)
-        ? prev.filter((s) => s !== slug)
-        : prev.length < 4 ? [...prev, slug] : prev
+      prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug]
     )
   }, [])
 
