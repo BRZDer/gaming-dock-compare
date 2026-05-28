@@ -33,4 +33,7 @@ specs:
     - 26
   weight_g: 335
   power_in: USB-C PD 140W (no adapter included)
-reviews: {}
+reviews:
+  amazon_asin: B0FS9D2PKS
+  amazon_rating: 4.8
+  amazon_review_count: 14
