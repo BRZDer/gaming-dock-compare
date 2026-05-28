@@ -7,17 +7,16 @@ import { getBandwidth, getMaxResolution, getInterfaceLabel } from "@/lib/specs"
 import { useCompare } from "@/components/compare/CompareProvider"
 
 const CARD_SPEC_ROWS: { key: string; label: string }[] = [
-  { key: "interface",  label: "Interface" },
-  { key: "speed",      label: "Transfer Speed" },
-  { key: "power",      label: "Power Delivery" },
-  { key: "ports",      label: "Total Ports" },
-  { key: "displays",   label: "Max Displays" },
-  { key: "res",        label: "Display Resolution" },
+  { key: "size",       label: "Size" },
+  { key: "weight",     label: "Weight" },
+  { key: "adapter",    label: "Adapter" },
+  { key: "interface",  label: "Upstream Interface" },
   { key: "hdmi",       label: "HDMI" },
-  { key: "dp",         label: "DisplayPort" },
+  { key: "dp",         label: "DP" },
   { key: "vga",        label: "VGA" },
-  { key: "tb",         label: "Thunderbolt" },
   { key: "usbc_disp",  label: "USB-C (Display)" },
+  { key: "tb",         label: "Thunderbolt" },
+  { key: "res",        label: "Display Resolution" },
   { key: "usba",       label: "USB-A" },
   { key: "usbc_data",  label: "USB-C (Data)" },
   { key: "eth",        label: "RJ45" },
@@ -26,16 +25,13 @@ const CARD_SPEC_ROWS: { key: string; label: string }[] = [
   { key: "microsd",    label: "microSD" },
   { key: "klock",      label: "Kensington Lock" },
   { key: "power_in",   label: "Power In" },
-  { key: "adapter",    label: "Power Adapter" },
   { key: "pwrbtn",     label: "Power Button" },
   { key: "leds",       label: "Indicator LEDs" },
   { key: "compat",     label: "Compatible System" },
   { key: "os",         label: "Supported OS" },
-  { key: "weight",     label: "Weight" },
-  { key: "size",       label: "Size" },
 ]
 
-const DEFAULT_VISIBLE = new Set(["interface", "speed", "power", "ports", "displays"])
+const DEFAULT_VISIBLE = new Set(["adapter", "interface", "tb", "usba", "usbc_data", "eth"])
 
 interface Props {
   product: ProductWithPrices
