@@ -54,9 +54,9 @@ export function HomePageClient({ products, brands }: Props) {
     setVisibleSpecs(allChecked ? new Set() : new Set(ALL_KEYS))
 
   return (
-    <div className="flex gap-6 items-start">
+    <div className="grid gap-6 items-start" style={{ gridTemplateColumns: "11rem 1fr" }}>
       {/* Spec filter sidebar */}
-      <div className="w-44 flex-shrink-0">
+      <div>
         <div className="sticky top-4 border rounded-lg p-3 bg-background">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Specs</span>
@@ -83,7 +83,7 @@ export function HomePageClient({ products, brands }: Props) {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 min-w-0">
+      <div className="min-w-0">
         <Suspense>
           <ProductFilters brands={brands} />
           <p className="text-sm text-muted-foreground mb-4">{products.length} products</p>
