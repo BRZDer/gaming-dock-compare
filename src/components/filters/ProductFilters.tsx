@@ -41,7 +41,7 @@ export function ProductFilters({ brands }: { brands: string[] }) {
   const maxPrice = params.get("maxPrice") ?? ""
 
   return (
-    <div className="flex gap-3 items-end mb-6 p-4 rounded-lg border bg-muted/30">
+    <div className="flex gap-3 items-end mb-6 p-4 rounded-lg border bg-muted/30 w-fit">
       {/* Category */}
       <div className="flex flex-col gap-1">
         <label className="text-xs font-medium text-muted-foreground">Interface</label>
