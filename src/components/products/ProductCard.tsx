@@ -110,9 +110,9 @@ tb:         specs.ports.thunderbolt ?? 0,
       </button>
 
       <CardHeader className="pb-2 pl-9">
-        <div className="flex items-start justify-between gap-2 min-h-[5rem]">
-          <CardTitle className="text-base leading-tight line-clamp-4">{name}</CardTitle>
-          <Badge variant="secondary" className="shrink-0">
+        <div className="flex flex-col justify-between min-h-[5rem]">
+          <CardTitle className="text-base leading-tight line-clamp-3">{name}</CardTitle>
+          <Badge variant="secondary" className="w-fit mt-1 whitespace-nowrap">
             {getInterfaceLabel(category)}
           </Badge>
         </div>
