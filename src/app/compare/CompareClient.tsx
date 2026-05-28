@@ -135,94 +135,96 @@ export function CompareClient({ products }: Props) {
         )}
       </div>
 
-      {selected.length < 2 ? (
-        <div className="text-center py-20 text-muted-foreground border border-dashed rounded-lg">
-          Select at least 2 products to compare.
-        </div>
-      ) : (
-        <div className="flex gap-4 items-start">
-          {/* Spec filter sidebar */}
-          <div className="w-44 flex-shrink-0">
-            <div className="sticky top-4 border rounded-lg p-3 bg-background">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Specs</span>
-                <button
-                  onClick={toggleAll}
-                  className="text-xs text-primary hover:underline"
-                >
-                  {allChecked ? "None" : "All"}
-                </button>
-              </div>
-              <div className="space-y-1">
-                {SPEC_ROWS.map((row) => (
-                  <label key={row.key} className="flex items-center gap-2 cursor-pointer group">
-                    <input
-                      type="checkbox"
-                      checked={visibleKeys.has(row.key)}
-                      onChange={() => toggleKey(row.key)}
-                      className="h-3.5 w-3.5 rounded border-input accent-primary"
-                    />
-                    <span className="text-xs text-muted-foreground group-hover:text-foreground leading-tight">
-                      {row.label}
-                    </span>
-                  </label>
-                ))}
-              </div>
+      <div className="flex gap-4 items-start">
+        {/* Spec filter sidebar */}
+        <div className="w-44 flex-shrink-0">
+          <div className="sticky top-4 border rounded-lg p-3 bg-background">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Specs</span>
+              <button
+                onClick={toggleAll}
+                className="text-xs text-primary hover:underline"
+              >
+                {allChecked ? "None" : "All"}
+              </button>
+            </div>
+            <div className="space-y-1">
+              {SPEC_ROWS.map((row) => (
+                <label key={row.key} className="flex items-center gap-2 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={visibleKeys.has(row.key)}
+                    onChange={() => toggleKey(row.key)}
+                    className="h-3.5 w-3.5 rounded border-input accent-primary"
+                  />
+                  <span className="text-xs text-muted-foreground group-hover:text-foreground leading-tight">
+                    {row.label}
+                  </span>
+                </label>
+              ))}
             </div>
           </div>
-
-          {/* Compare table */}
-          <div className="overflow-x-auto flex-1 min-w-0">
-            <table className="w-full text-sm border rounded-lg overflow-hidden">
-              <thead>
-                <tr className="border-b bg-muted/50">
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground w-36">Spec</th>
-                  {selected.map((p) => (
-                    <th key={p.slug} className="px-4 py-3 text-left min-w-[180px]">
-                      <a href={`/products/${p.slug}`} className="font-semibold hover:underline">
-                        {p.name}
-                      </a>
-                      <p className="text-muted-foreground font-normal text-xs">{p.brand}</p>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {visibleRows.length === 0 ? (
-                  <tr>
-                    <td colSpan={selected.length + 1} className="px-4 py-8 text-center text-muted-foreground text-sm">
-                      No specs selected. Check some rows on the left.
-                    </td>
-                  </tr>
-                ) : (
-                  visibleRows.map((row, ri) => {
-                    const values = selected.map((p) => row.getValue(p))
-                    const bestIdx = getBestIndex(values, row.key)
-                    return (
-                      <tr key={row.key} className={ri % 2 === 0 ? "border-b bg-muted/20" : "border-b"}>
-                        <td className="px-4 py-3 text-muted-foreground font-medium">{row.label}</td>
-                        {values.map((v, vi) => (
-                          <td
-                            key={vi}
-                            className={`px-4 py-3 font-medium capitalize ${
-                              vi === bestIdx ? "text-green-600 dark:text-green-400" : ""
-                            }`}
-                          >
-                            {row.key === "price" ? `$${Number(v).toFixed(2)}` : v}
-                          </td>
-                        ))}
-                      </tr>
-                    )
-                  })
-                )}
-              </tbody>
-            </table>
-            <p className="text-xs text-muted-foreground mt-2">
-              Green = best value in that category.
-            </p>
-          </div>
         </div>
-      )}
+
+        {/* Compare area */}
+        <div className="flex-1 min-w-0">
+          {selected.length < 2 ? (
+            <div className="text-center py-20 text-muted-foreground border border-dashed rounded-lg">
+              Select at least 2 products to compare.
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border rounded-lg overflow-hidden">
+                <thead>
+                  <tr className="border-b bg-muted/50">
+                    <th className="text-left px-4 py-3 font-medium text-muted-foreground w-36">Spec</th>
+                    {selected.map((p) => (
+                      <th key={p.slug} className="px-4 py-3 text-left min-w-[180px]">
+                        <a href={`/products/${p.slug}`} className="font-semibold hover:underline">
+                          {p.name}
+                        </a>
+                        <p className="text-muted-foreground font-normal text-xs">{p.brand}</p>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {visibleRows.length === 0 ? (
+                    <tr>
+                      <td colSpan={selected.length + 1} className="px-4 py-8 text-center text-muted-foreground text-sm">
+                        No specs selected. Check some rows on the left.
+                      </td>
+                    </tr>
+                  ) : (
+                    visibleRows.map((row, ri) => {
+                      const values = selected.map((p) => row.getValue(p))
+                      const bestIdx = getBestIndex(values, row.key)
+                      return (
+                        <tr key={row.key} className={ri % 2 === 0 ? "border-b bg-muted/20" : "border-b"}>
+                          <td className="px-4 py-3 text-muted-foreground font-medium">{row.label}</td>
+                          {values.map((v, vi) => (
+                            <td
+                              key={vi}
+                              className={`px-4 py-3 font-medium capitalize ${
+                                vi === bestIdx ? "text-green-600 dark:text-green-400" : ""
+                              }`}
+                            >
+                              {row.key === "price" ? `$${Number(v).toFixed(2)}` : v}
+                            </td>
+                          ))}
+                        </tr>
+                      )
+                    })
+                  )}
+                </tbody>
+              </table>
+              <p className="text-xs text-muted-foreground mt-2">
+                Green = best value in that category.
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
     </main>
   )
 }
