@@ -139,15 +139,22 @@ export function ProductCard({ product, visibleSpecs }: Props) {
           </div>
         )}
 
-        {product.reviews?.amazon_rating !== undefined && (
-          <div className="flex items-center gap-1.5 text-sm">
-            <span className="text-amber-400">{"★".repeat(Math.round(product.reviews.amazon_rating))}{"☆".repeat(5 - Math.round(product.reviews.amazon_rating))}</span>
-            <span className="font-medium">{product.reviews.amazon_rating.toFixed(1)}</span>
-            {product.reviews.amazon_review_count !== undefined && (
-              <span className="text-muted-foreground">({product.reviews.amazon_review_count.toLocaleString()})</span>
-            )}
-          </div>
-        )}
+        <div className="flex items-center gap-1.5 text-sm">
+          {product.reviews?.amazon_rating !== undefined ? (
+            <>
+              <span className="text-amber-400">{"★".repeat(Math.round(product.reviews.amazon_rating))}{"☆".repeat(5 - Math.round(product.reviews.amazon_rating))}</span>
+              <span className="font-medium">{product.reviews.amazon_rating.toFixed(1)}</span>
+              {product.reviews.amazon_review_count !== undefined && (
+                <span className="text-muted-foreground">({product.reviews.amazon_review_count.toLocaleString()})</span>
+              )}
+            </>
+          ) : (
+            <>
+              <span className="text-amber-400">{"☆".repeat(5)}</span>
+              <span className="font-medium text-muted-foreground">0</span>
+            </>
+          )}
+        </div>
 
         {(product.reviews?.tomshardware_url || product.reviews?.pcworld_url) && (
           <div className="flex gap-2 flex-wrap text-xs">
